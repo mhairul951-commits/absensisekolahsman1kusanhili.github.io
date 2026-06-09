@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sistem Absensi Siswa</title>
+
+<style>
+body{
+    font-family: Arial, sans-serif;
+    background-image: url('poto_sma.jpeg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    margin:0;
+}
+
+.container{
+    width: 75%;
+    max-width: 900px;
+    margin: 30px auto;
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    padding: 25px;
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.2);
+    box-shadow: 0 8px 32px rgba(15, 15, 15, 0.25);
+}
+
+h1,h2{
+    text-align:center;
+}
+
+input,select,button{
+    width:100%;
+    padding:10px;
+    margin:5px 0;
+    box-sizing:border-box;
+}
+
+button{
+    background:#007bff;
+    color:white;
+    border:none;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#0056b3;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:20px;
+}
+
+th,td{
+    border:1px solid #ddd;
+    padding:10px;
+    text-align:center;
+}
+
+th{
+    background:#007bff;
+    color:white;
+}
+
+#halamanSiswa,
+#halamanGuru{
+    display:none;
+}
+
+h1,h2,h3 { margin:0;}
+
+center{
+    margin-top: 20px;
+}
+
+h1{
+    color: white;
+    font-size: 48px;
+    font-weight: bold;
+    text-shadow: 0 4px 15px rgba(0,0,0,0.8);
+    margin-bottom: 5px;
+}
+
+h2{
+    color: #f8fafc;
+    font-size: 28px;
+    font-weight: 600;
+    text-shadow: 0 3px 10px rgba(0,0,0,0.8);
+    margin-bottom: 5px;
+}
+
+h3{
+    display: inline-block;
+    color: white;
+    font-size: 20px;
+    font-weight: 400;
+    background: rgba(41, 25, 25, 0.15);
+    backdrop-filter: blur(10px);
+    padding: 8px 20px;
+    border-radius: 30px;
+    border: 1px solid rgba(255,255,255,0.3);
+    margin-top: 10px;
+}
+
+.header-sekolah{
+    display:flex;
+    align-items:center;
+    gap:20px;
+    padding:20px 40px;
+}
+
+.logo{
+    width:120px;
+    height:120px;
+    object-fit:contain;
+    filter:drop-shadow(0 5px 15px rgb(2, 1, 3));
+}
+
+.judul{
+    text-align:left;
+}
+
+.reset-btn{
+    background:#dc3545;
+}
+
+.reset-btn:hover{
+    background:#b02a37;
+}
+
+.header-sekolah{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:25px;
+    margin-top:25px;
+    margin-bottom:20px;
+}
+
+.reset-btn{
+    background:#dc3545;
+}
+
+.reset-btn:hover{
+    background:#bb2d3b;
+}
+
+</style>
+</head>
+<body>
+
+<div class="header-sekolah">
+
+    <img src="LOGO_123.png" class="logo">
+
+    <div class="judul">
+        <h1>SMA NEGERI 1 KUSAN HILIR</h1>
+        <h2>ABSENSI SISWA MIPA DAN IPS KELAS 10/11/12</h2>
+        <h3>JL. Kusuma Negara Desa Kampung Baru</h3>
+    </div>
+
+</div>
+<!-- LOGIN -->
+<div class="container" id="halamanLogin">
+    <h2>PRESENSI SISWA</h2>
+
+    <select id="role">
+        <option value="siswa">Login Siswa</option>
+        <option value="guru">Login Guru</option>
+    </select>
+
+    <input type="text" id="username" placeholder="Username">
+    <input type="password" id="password" placeholder="Password">
+
+    <button onclick="login()">Login</button>
+
+    <hr>
+
+    <div style="display:none;">
+    Username guru: guru<br>
+    Password: 123
+    </div>
+
+    <br><br>
+
+    <div style="display:none;">
+    Username : siswa<br>
+    Password : 123
+    </div>
+</div>
+
+<!-- HALAMAN SISWA -->
+<div class="container" id="halamanSiswa">
+    <h2>Menu Absensi Siswa</h2>
+
+    <input type="text" id="nama" placeholder="Nama Siswa">
+
+    <input type="date" id="tanggal">
+
+    <input type="time" id="waktu"> 
+
+    <input type="text" id="mapel" placeholder="Mata Pelajaran">
+
+    <input type="number" id="pertemuan" placeholder="Pertemuan Ke-" min="1">
+
+    <select id="status">
+        <option>Hadir</option>
+        <option>Izin</option>
+        <option>Sakit</option>
+        <option>Alpha</option>
+    </select>
+
+    <button onclick="simpanAbsensi()">
+        Simpan Absensi
+    </button>
+
+    <button onclick="logout()">
+        Logout
+    </button>
+</div>
+
+<!-- HALAMAN GURU -->
+<div class="container" id="halamanGuru">
+    <h2>Data Absensi Siswa</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Nama</th>
+                <th>Tanggal</th>
+                <th>Mata Pelajaran</th>
+                <th>Pertemuan</th>
+                <th>Waktu</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+
+        <tbody id="dataAbsensi"></tbody>
+    </table>
+
+    <br>
+
+    <button class="reset-btn" onclick="resetAbsensi()">
+    Reset Semua Absensi
+</button>
+
+<br><br>
+
+    <button onclick="logout()">
+        Logout
+    </button>
+</div>
+
+<script>
+
+let dataAbsensi = JSON.parse(localStorage.getItem("absensi")) || [];
+
+function login(){
+
+    let role = document.getElementById("role").value;
+    let username = document.getElementById("username").value;
+    let password = document.getElementById("password").value;
+
+    if(role=="siswa" && username=="siswa" && password=="123"){
+        document.getElementById("halamanLogin").style.display="none";
+        document.getElementById("halamanSiswa").style.display="block";
+    }
+
+    else if(role=="guru" && username=="guru" && password=="123"){
+        document.getElementById("halamanLogin").style.display="none";
+        document.getElementById("halamanGuru").style.display="block";
+
+        tampilkanData();
+    }
+
+    else{
+        alert("Username atau Password Salah!");
+    }
+}
+
+function simpanAbsensi(){
+
+    let nama = document.getElementById("nama").value;
+    let tanggal = document.getElementById("tanggal").value;
+    let mapel = document.getElementById("mapel").value;
+    let pertemuan = document.getElementById("pertemuan").value;
+    let waktu = document.getElementById("waktu").value;
+    let status = document.getElementById("status").value;
+
+    if(nama=="" || tanggal=="" || mapel=="" || pertemuan=="" || waktu==""){
+        alert("Lengkapi data terlebih dahulu!");
+        return;
+    }
+
+    dataAbsensi.push({
+    nama:nama,
+    tanggal:tanggal,
+    mapel:mapel,
+    pertemuan:pertemuan,
+    waktu:waktu,
+    status:status
+    });
+
+    localStorage.setItem(
+        "absensi",
+        JSON.stringify(dataAbsensi)
+    );
+
+    alert("Absensi berhasil disimpan");
+
+    document.getElementById("nama").value="";
+    document.getElementById("tanggal").value="";
+    document.getElementById("waktu").value="";
+    document.getElementById("pertemuan").value="";
+    document.getElementById("mapel").value="";
+}
+
+function tampilkanData(){
+
+    let tbody = document.getElementById("dataAbsensi");
+
+    tbody.innerHTML="";
+
+    dataAbsensi.forEach((item,index)=>{
+
+        tbody.innerHTML += `
+        <tr>
+            <td>${item.nama}</td>
+            <td>${item.tanggal}</td>
+            <td>${item.mapel}</td>
+            <td>${item.pertemuan}</td>
+            <td>${item.waktu}</td>
+            <td>${item.status}</td>
+        </tr>
+        `;
+    });
+}
+
+function resetAbsensi(){
+
+    if(confirm("Yakin ingin menghapus semua data absensi?")){
+
+        localStorage.removeItem("absensi");
+
+        dataAbsensi = [];
+
+        tampilkanData();
+
+        alert("Semua data absensi berhasil dihapus");
+    }
+}
+
+function logout(){
+    location.reload();
+}
+
+function logout(){
+    location.reload();
+}
+
+</script>
+
+</body>
+</html>
