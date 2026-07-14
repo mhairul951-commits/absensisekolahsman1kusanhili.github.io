@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sistem Absensi Siswa</title>
-
+ 
 <style>
 body{
     font-family: Arial, sans-serif;
@@ -15,78 +15,119 @@ body{
     background-attachment: fixed;
     margin:0;
 }
-
+ 
 .container{
-    width: 75%;
-    max-width: 900px;
+    width: 50%;
+    max-width: 600px;
     margin: 30px auto;
     background: rgba(255,255,255,0.15);
     backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
     padding: 25px;
     border-radius: 20px;
-    border: 1px solid rgba(255,255,255,0.2);
-    box-shadow: 0 8px 32px rgba(15, 15, 15, 0.25);
 }
-
+ 
+.container.lebar{
+    max-width: 900px;
+}
+ 
 h1,h2{
     text-align:center;
 }
-
+ 
 input,select,button{
     width:100%;
-    padding:10px;
+    padding:12px;
     margin:5px 0;
     box-sizing:border-box;
+    border:none;
+    border-radius:12px;
+    font-size:15px;
 }
-
+ 
 button{
-    background:#007bff;
+    background:linear-gradient(
+        135deg,
+        #0d6efd,
+        #4facfe
+    );
     color:white;
     border:none;
     cursor:pointer;
+    border-radius:12px;
+    font-weight:bold;
+    padding:12px;
 }
-
+ 
 button:hover{
     background:#0056b3;
 }
-
+ 
 table{
     width:100%;
     border-collapse:collapse;
     margin-top:20px;
+    animation:fadeIn 1.5s ease;
 }
-
+ 
 th,td{
     border:1px solid #ddd;
     padding:10px;
     text-align:center;
 }
-
+ 
 th{
     background:#007bff;
     color:white;
 }
-
+ 
 #halamanSiswa,
 #halamanGuru{
     display:none;
 }
-
+ 
 h1,h2,h3 { margin:0;}
-
+ 
 center{
     margin-top: 20px;
 }
-
+ 
 h1{
-    color: white;
-    font-size: 48px;
-    font-weight: bold;
-    text-shadow: 0 4px 15px rgba(0,0,0,0.8);
-    margin-bottom: 5px;
+    color:white;
+    font-size:48px;
+    font-weight:bold;
+    text-shadow:0 4px 15px rgba(0,0,0,0.8);
+    margin-bottom:5px;
+ 
+    position:relative;
+    overflow:hidden;
 }
-
+ 
+h1::before{
+    content:"";
+    position:absolute;
+    top:0;
+    left:-100%;
+    width:50%;
+    height:100%;
+    background:linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,255,255,0.8),
+        transparent
+    );
+    animation:kilat 3s infinite;
+}
+ 
+@keyframes kilat{
+    0%{
+        left:-100%;
+    }
+ 
+    100%{
+        left:150%;
+    }
+}
+ 
 h2{
     color: #f8fafc;
     font-size: 28px;
@@ -94,46 +135,47 @@ h2{
     text-shadow: 0 3px 10px rgba(0,0,0,0.8);
     margin-bottom: 5px;
 }
-
+ 
 h3{
-    display: inline-block;
-    color: white;
-    font-size: 20px;
-    font-weight: 400;
-    background: rgba(41, 25, 25, 0.15);
-    backdrop-filter: blur(10px);
-    padding: 8px 20px;
-    border-radius: 30px;
-    border: 1px solid rgba(255,255,255,0.3);
-    margin-top: 10px;
+    display:block;
+    text-align:center;
+    color:white;
+    font-size:20px;
+    font-weight:400;
+    background:rgba(41,25,25,0.15);
+    backdrop-filter:blur(10px);
+    padding:8px 20px;
+    border-radius:30px;
+    border:1px solid rgba(255,255,255,0.3);
+    margin-top:10px;
 }
-
+ 
 .header-sekolah{
     display:flex;
     align-items:center;
     gap:20px;
     padding:20px 40px;
 }
-
+ 
 .logo{
-    width:120px;
-    height:120px;
+    width:170px;
+    height:170px;
     object-fit:contain;
     filter:drop-shadow(0 5px 15px rgb(2, 1, 3));
 }
-
+ 
 .judul{
-    text-align:left;
+    text-align:center;
 }
-
+ 
 .reset-btn{
     background:#dc3545;
 }
-
+ 
 .reset-btn:hover{
     background:#b02a37;
 }
-
+ 
 .header-sekolah{
     display:flex;
     justify-content:center;
@@ -142,229 +184,3235 @@ h3{
     margin-top:25px;
     margin-bottom:20px;
 }
-
+ 
 .reset-btn{
     background:#dc3545;
 }
-
+ 
 .reset-btn:hover{
     background:#bb2d3b;
 }
-
+ 
+/* ANIMASI MASUK */
+@keyframes fadeIn{
+    from{
+        opacity:0;
+        transform:translateY(30px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+ 
+/* ANIMASI LOGO */
+@keyframes logoZoom{
+    from{
+        transform:scale(0.8);
+    }
+    to{
+        transform:scale(1);
+    }
+}
+ 
+/* ANIMASI JUDUL */
+@keyframes slideKanan{
+    from{
+        opacity:0;
+        transform:translateX(-50px);
+    }
+    to{
+        opacity:1;
+        transform:translateX(0);
+    }
+}
+ 
+.container{
+    animation:fadeIn 1s ease;
+}
+ 
+.logo{
+    animation:logoZoom 1s ease;
+}
+ 
+.judul{
+    animation:slideKanan 1.2s ease;
+}
+ 
+button{
+    transition:0.3s;
+}
+ 
+button:hover{
+    transform:translateY(-3px);
+}
+ 
+h1,h2,h3{
+    text-align:center;
+}
+ 
+.card-title{
+    text-align:center;
+    color:white;
+    font-size:20px;
+    font-weight:bold;
+    margin-bottom:20px;
+    letter-spacing:2px;
+}
+ 
+.row{
+    display:flex;
+    gap:10px;
+}
+ 
+.row div{
+    flex:1;
+}
+ 
+label{
+    color:white;
+    display:block;
+    margin-bottom:5px;
+    font-weight:bold;
+}
+ 
+input:focus,
+select:focus{
+    outline:none;
+    transform:scale(1.02);
+    box-shadow:0 0 15px rgba(0,123,255,0.5);
+}
+ 
+th,td{
+    border:2px solid #e4dede;
+    padding:8px;
+    text-align:center;
+    white-space:nowrap;
+}
+ 
+/* ====== TABEL MAPEL (GAYA SIMARI) ====== */
+.tabel-wrap{
+    background:rgba(255,255,255,0.9);
+    border-radius:14px;
+    padding:10px;
+    margin-top:15px;
+    overflow-x:auto;
+}
+ 
+.tabel-wrap table th{
+    background:#0d6efd;
+    color:white;
+}
+ 
+.tabel-wrap table td{
+    color:#222;
+}
+ 
+.btn-presensi{
+    background:linear-gradient(135deg,#6f42c1,#8e5bf0);
+    padding:8px 14px;
+    width:auto;
+    font-size:13px;
+    display:inline-block;
+}
+ 
+.btn-presensi:hover{
+    background:#5a34a3;
+    transform:translateY(-2px);
+}
+ 
+/* ====== MODAL PRESENSI ====== */
+.modal-overlay{
+    display:none;
+    position:fixed;
+    top:0;left:0;
+    width:100%;height:100%;
+    background:rgba(0,0,0,0.6);
+    z-index:999;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+    box-sizing:border-box;
+}
+ 
+.modal-overlay.aktif{
+    display:flex;
+}
+ 
+.modal-box{
+    background:white;
+    width:100%;
+    max-width:750px;
+    max-height:88vh;
+    overflow-y:auto;
+    border-radius:16px;
+    padding:25px;
+    position:relative;
+    animation:fadeIn 0.35s ease;
+}
+ 
+.modal-box h2{
+    color:#0d6efd;
+    text-shadow:none;
+    text-align:left;
+    font-size:22px;
+}
+ 
+.modal-box label{
+    color:#333;
+}
+ 
+.modal-close{
+    position:absolute;
+    top:15px;
+    right:15px;
+    width:auto;
+    padding:6px 14px;
+    background:#dc3545;
+    font-size:14px;
+}
+ 
+.modal-close:hover{
+    background:#b02a37;
+}
+ 
+.badge{
+    padding:4px 10px;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:bold;
+    color:white;
+}
+ 
+.badge-hadir{ background:#198754; }
+.badge-izin{ background:#0dcaf0; color:#003; }
+.badge-sakit{ background:#ffc107; color:#332701; }
+.badge-alpha{ background:#dc3545; }
+.badge-b{ background:#0d6efd; }
+ 
+.modal-box hr{
+    margin:20px 0;
+    border:none;
+    border-top:1px solid #eee;
+}
+ 
+.modal-box h3{
+    text-align:left;
+    color:#333;
+    background:none;
+    padding:0;
+    border:none;
+    font-size:17px;
+    margin-bottom:10px;
+}
+ 
+/* ====== PANEL BUKA SESI (GURU) ====== */
+.sesi-panel{
+    background:rgba(255,255,255,0.95);
+    border-radius:14px;
+    padding:15px 20px;
+    margin-top:20px;
+    text-align:left;
+}
+ 
+.sesi-panel h3{
+    color:#0d6efd;
+    margin-bottom:10px;
+}
+ 
+.sesi-panel label{
+    color:#333;
+}
+ 
+.sesi-panel table{
+    margin-top:15px;
+}
+ 
+.sesi-panel table td{
+    color:#222;
+}
+ 
+.tutup-btn{
+    background:#6c757d;
+    width:auto;
+    padding:6px 12px;
+    font-size:13px;
+}
+ 
+.tutup-btn:hover{
+    background:#565e64;
+}
+ 
+/* ====== INFO SESI DI MODAL SISWA ====== */
+.info-sesi{
+    background:#eef4ff;
+    border:1px solid #cfe0ff;
+    border-radius:12px;
+    padding:15px;
+    margin-top:15px;
+    text-align:left;
+    color:#222;
+}
+ 
+.info-sesi p{
+    margin:6px 0;
+}
+ 
+/* ====== MENU BAR NAVIGASI (GURU & SISWA) ====== */
+.menu-bar{
+    display:flex;
+    gap:10px;
+    margin:20px 0;
+    background:rgba(255,255,255,0.15);
+    padding:8px;
+    border-radius:14px;
+    flex-wrap:wrap;
+}
+ 
+.menu-btn{
+    flex:1;
+    min-width:140px;
+    width:auto;
+    background:rgba(255,255,255,0.2);
+    color:white;
+    font-weight:bold;
+    border:1px solid rgba(255,255,255,0.35);
+    padding:10px;
+    border-radius:10px;
+    cursor:pointer;
+    transition:0.3s;
+    margin:0;
+}
+ 
+.menu-btn:hover{
+    background:rgba(255,255,255,0.35);
+    transform:translateY(-2px);
+}
+ 
+.menu-btn.aktif{
+    background:linear-gradient(135deg,#0d6efd,#4facfe);
+    border-color:transparent;
+}
+ 
+.menu-konten{
+    animation:fadeIn 0.4s ease;
+}
+ 
+/* ====== QR PRESENSI (SISWA) ====== */
+.qr-box{
+    background:rgba(255,255,255,0.95);
+    border-radius:14px;
+    padding:20px;
+    margin-top:15px;
+    text-align:center;
+}
+ 
+.qr-box h3{
+    color:#0d6efd;
+    text-align:center;
+    background:none;
+    border:none;
+    padding:0;
+    margin-bottom:15px;
+}
+ 
+#qrcodeSiswa{
+    display:inline-block;
+    padding:12px;
+    background:white;
+    border-radius:12px;
+    border:2px solid #0d6efd;
+}
+ 
+.qr-keterangan{
+    color:#555;
+    font-size:13px;
+    margin-top:12px;
+}
+ 
+/* ====== SCAN QR PRESENSI (GURU) ====== */
+.scan-video-wrap{
+    position:relative;
+    width:100%;
+    max-width:420px;
+    margin:15px auto;
+    border-radius:14px;
+    overflow:hidden;
+    background:#000;
+}
+ 
+#videoScan{
+    width:100%;
+    display:block;
+}
+ 
+.scan-tombol{
+    display:flex;
+    gap:10px;
+    max-width:420px;
+    margin:0 auto;
+}
+ 
+.scan-tombol button{
+    width:auto;
+    flex:1;
+    padding:10px;
+    font-size:14px;
+}
+ 
+.stop-btn{
+    background:#dc3545;
+}
+ 
+.stop-btn:hover{
+    background:#b02a37;
+}
+ 
 </style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.min.js"></script>
 </head>
 <body>
-
+ 
 <div class="header-sekolah">
-
+ 
     <img src="LOGO_123.png" class="logo">
-
+ 
     <div class="judul">
         <h1>SMA NEGERI 1 KUSAN HILIR</h1>
-        <h2>ABSENSI SISWA MIPA DAN IPS KELAS 10/11/12</h2>
-        <h3>JL. Kusuma Negara Desa Kampung Baru</h3>
+        <h2>PRESENSI SISWA MIPA DAN IPS</h2>
+        <h3>Jl. Kusuma Negara Desa Kampung Baru</h3>
     </div>
-
+ 
 </div>
 <!-- LOGIN -->
 <div class="container" id="halamanLogin">
-    <h2>PRESENSI SISWA</h2>
-
+    <h2>LOGIN</h2>
+ 
     <select id="role">
         <option value="siswa">Login Siswa</option>
         <option value="guru">Login Guru</option>
+        <option value="admin">Login Admin</option>
     </select>
-
+ 
     <input type="text" id="username" placeholder="Username">
     <input type="password" id="password" placeholder="Password">
-
+ 
     <button onclick="login()">Login</button>
-
+ 
+    <button onclick="bukaRegister()" style="background:#198754;">
+        📝 Daftar Akun Siswa
+    </button>
+ 
     <hr>
-
+ 
     <div style="display:none;">
     Username guru: guru<br>
     Password: 123
     </div>
+ 
+    <p style="
+text-align:center;
+color:white;
+font-size:14px;
+font-style:italic;
+font-weight:300;
+letter-spacing:4px;
+text-transform:uppercase;
+margin-bottom:20px;
+">
+Developed | by M. Hairul Jesri
+</p>
+ 
+</div>
+ 
+<!-- REGISTRASI AKUN SISWA -->
+<div class="container" id="halamanRegister" style="display:none;">
+    <h2>DAFTAR AKUN SISWA</h2>
+ 
+    <div id="formRegisterIsi">
+ 
+    <select id="regKelas" onchange="tampilkanNamaRegister()">
+        <option value="">Pilih Kelas</option>
+        <option>MIPA X</option>
+        <option>MIPA XI</option>
+        <option>MIPA XII</option>
+        <option>IPS X</option>
+        <option>IPS XI</option>
+        <option>IPS XII</option>
+    </select>
+ 
+    <select id="regNama">
+        <option value="">Pilih Kelas dulu</option>
+    </select>
+ 
+    <input type="text" id="regUsername" placeholder="Buat Username">
+    <input type="password" id="regPassword" placeholder="Buat Password">
+    <input type="password" id="regKonfirmasi" placeholder="Konfirmasi Password">
+ 
+    <div id="regPesan" style="
+        display:none;
+        background:#fff3cd;
+        color:#856404;
+        padding:10px;
+        border-radius:10px;
+        text-align:center;
+        font-weight:bold;
+        margin:10px 0;">
+    </div>
+ 
+    <button onclick="daftarAkun()" style="background:#198754;">
+        Daftar
+    </button>
+ 
+    <button onclick="tutupRegister()" style="background:#6c757d;">
+        Kembali ke Login
+    </button>
+ 
+    </div>
+ 
+    <div id="qrBaruWrap" style="display:none;">
+        <div class="qr-box">
+            <h3>✅ Akun Berhasil Dibuat!</h3>
+            <div id="qrcodeBaru"></div>
+            <p class="qr-keterangan">
+                Ini QR presensi kamu. Simpan / screenshot sekarang juga,<br>
+                QR ini juga selalu bisa dilihat lagi di menu "QR Presensi" setelah login.
+            </p>
+            <button onclick="unduhQR('qrcodeBaru', usernameQRBaru)" style="background:#198754;">
+                ⬇️ Download QR Code
+            </button>
+            <button onclick="lanjutDariQRBaru()">Lanjut ke Login</button>
+        </div>
+    </div>
+ 
+</div>
+ 
+<!-- HALAMAN SISWA -->
+<div class="container lebar" id="halamanSiswa">
+    <div class="card-title">
+        🎓 Presensi Mata Pelajaran
+    </div>
+ 
+    <p id="salamSiswa" style="text-align:center;color:white;font-size:16px;font-weight:bold;margin-bottom:15px;"></p>
+ 
+    <div class="menu-bar">
+        <button class="menu-btn aktif" id="menuBtnPresensi" onclick="gantiMenuSiswa('presensi')">📋 Presensi</button>
+        <button class="menu-btn" id="menuBtnQR" onclick="gantiMenuSiswa('qr')">🔳 QR Presensi</button>
+        <button class="menu-btn" id="menuBtnNilai" onclick="gantiMenuSiswa('nilai')">📊 Nilai</button>
+    </div>
+ 
+    <div class="menu-konten" id="menuKontenPresensi">
+        <div id="daftarMapelWrap" class="tabel-wrap" style="display:none;">
+            <table>
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Mata Pelajaran</th>
+                        <th>Kelas</th>
+                        <th>Status Sesi</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody id="daftarMapel"></tbody>
+            </table>
+        </div>
+    </div>
+ 
+    <div class="menu-konten" id="menuKontenQR" style="display:none;">
+        <div class="qr-box">
+            <h3>🔳 QR Presensi Kamu</h3>
+            <div id="qrcodeSiswa"></div>
+            <p class="qr-keterangan">
+                Tunjukkan QR ini ke kamera guru saat sesi presensi dibuka.<br>
+                Setiap QR ini unik untuk akun kamu, jangan bagikan ke siswa lain.
+            </p>
+            <button onclick="unduhQR('qrcodeSiswa', siswaLogin.username)" style="background:#198754;max-width:220px;margin:10px auto 0;">
+                ⬇️ Download QR Code
+            </button>
+        </div>
+    </div>
+ 
+    <div class="menu-konten" id="menuKontenNilai" style="display:none;">
+        <div id="daftarNilaiWrap" class="tabel-wrap" style="display:none; margin-top:15px;">
+            <div style="text-align:center;color:#0d6efd;font-size:17px;font-weight:bold;margin-bottom:10px;letter-spacing:1px;">
+                📊 Daftar Nilai
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Mata Pelajaran</th>
+                        <th>Semester</th>
+                        <th>Jenis</th>
+                        <th>Nilai</th>
+                        <th>Keterangan</th>
+                        <th>Tanggal</th>
+                    </tr>
+                </thead>
+                <tbody id="daftarNilaiSiswa"></tbody>
+            </table>
 
-    <br><br>
+            <button onclick="downloadNilaiSiswa()" style="margin-top:15px;">
+                ⬇️ Download Data Nilai
+            </button>
+        </div>
+    </div>
+ 
+    <button onclick="logout()" style="margin-top:15px;">
+        Logout
+    </button>
+</div>
+ 
+<!-- HALAMAN GURU -->
+<div class="container lebar" id="halamanGuru">
+    <h2>DATA PRESENSI SISWA</h2>
+ 
+    <div class="menu-bar">
+        <button class="menu-btn aktif" id="menuBtnScan" onclick="gantiMenuGuru('scan')">📷 Scan QR Presensi</button>
+        <button class="menu-btn" id="menuBtnNilaiGuru" onclick="gantiMenuGuru('nilai')">📝 Input Nilai</button>
+        <button class="menu-btn" id="menuBtnAbsensi" onclick="gantiMenuGuru('absensi')">📋 Data Absensi</button>
+    </div>
+ 
+    <div class="menu-konten" id="menuKontenScan">
+        <div class="sesi-panel">
+            <h3>1️⃣ Buka Sesi Presensi</h3>
 
-    <div style="display:none;">
-    Username : siswa<br>
-    Password : 123
+            <div class="row">
+                <div>
+                    <label>Kelas</label>
+                    <select id="scanKelas" onchange="isiScanMapel()">
+                        <option value="">Pilih Kelas</option>
+                        <option>MIPA X</option>
+                        <option>MIPA XI</option>
+                        <option>MIPA XII</option>
+                        <option>IPS X</option>
+                        <option>IPS XI</option>
+                        <option>IPS XII</option>
+                    </select>
+                </div>
+                <div>
+                    <label>Mata Pelajaran</label>
+                    <select id="scanMapel" onchange="cekSesiUntukScan()">
+                        <option value="">Pilih Kelas dulu</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row">
+                <div>
+                    <label>Pertemuan Ke</label>
+                    <input type="number" id="scanPertemuan" min="1" placeholder="Contoh: 1">
+                </div>
+                <div>
+                    <label>Tanggal</label>
+                    <input type="date" id="scanTanggal">
+                </div>
+            </div>
+
+            <div class="row">
+                <div>
+                    <label>Waktu</label>
+                    <input type="time" id="scanWaktu">
+                </div>
+            </div>
+
+            <button id="btnBukaSesi" onclick="bukaSesiPresensi()" style="background:linear-gradient(135deg,#198754,#20c997);">
+                🗂️ Buka Sesi Presensi
+            </button>
+
+            <div id="sesiPesan" style="
+                display:none;
+                background:#fff3cd;
+                color:#856404;
+                padding:10px;
+                border-radius:10px;
+                text-align:center;
+                font-weight:bold;
+                margin:10px 0;">
+            </div>
+
+            <hr>
+
+            <h3>2️⃣ Scan QR Presensi Siswa</h3>
+
+            <p id="statusSesiUntukScan" style="color:#666;font-size:14px;text-align:center;">
+                Pilih Kelas &amp; Mata Pelajaran di atas untuk memulai scan pada sesi yang sudah dibuka.
+            </p>
+
+            <div class="scan-video-wrap">
+                <video id="videoScan" autoplay muted playsinline></video>
+            </div>
+            <canvas id="canvasScan" style="display:none;"></canvas>
+ 
+            <div class="scan-tombol">
+                <button id="btnMulaiScan" onclick="startScan()">▶ Mulai Scan</button>
+                <button id="btnStopScan" class="stop-btn" onclick="stopScan()" style="display:none;">⏹ Berhenti Scan</button>
+            </div>
+ 
+            <div id="scanPesan" style="
+                display:none;
+                background:#fff3cd;
+                color:#856404;
+                padding:10px;
+                border-radius:10px;
+                text-align:center;
+                font-weight:bold;
+                margin:15px 0;">
+            </div>
+ 
+            <p style="color:#666;font-size:13px;text-align:center;margin-top:10px;">
+                Kamera memerlukan izin akses dan halaman diakses lewat HTTPS atau localhost.
+            </p>
+
+            <hr>
+
+            <h3>🗂️ Sesi Presensi Aktif</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Kelas</th>
+                        <th>Mata Pelajaran</th>
+                        <th>Pertemuan</th>
+                        <th>Tanggal</th>
+                        <th>Waktu</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody id="daftarSesiAktif">
+                    <tr><td colspan="6">Belum ada sesi presensi yang dibuka</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+ 
+    <div class="menu-konten" id="menuKontenNilaiGuru" style="display:none;">
+        <div class="sesi-panel">
+            <h3>📝 Input Nilai Siswa</h3>
+ 
+            <div class="row">
+                <div>
+                    <label>Kelas</label>
+                    <select id="nilaiKelas" onchange="isiFormNilai()">
+                        <option value="">Pilih Kelas</option>
+                        <option>MIPA X</option>
+                        <option>MIPA XI</option>
+                        <option>MIPA XII</option>
+                        <option>IPS X</option>
+                        <option>IPS XI</option>
+                        <option>IPS XII</option>
+                    </select>
+                </div>
+                <div>
+                    <label>Nama Siswa</label>
+                    <select id="nilaiNama">
+                        <option value="">Pilih Kelas dulu</option>
+                    </select>
+                </div>
+            </div>
+ 
+            <div class="row">
+                <div>
+                    <label>Mata Pelajaran</label>
+                    <select id="nilaiMapel">
+                        <option value="">Pilih Kelas dulu</option>
+                    </select>
+                </div>
+                <div>
+                    <label>Semester</label>
+                    <select id="nilaiSemester">
+                        <option>Ganjil</option>
+                        <option>Genap</option>
+                    </select>
+                </div>
+            </div>
+ 
+            <div class="row">
+                <div>
+                    <label>Jenis Nilai</label>
+                    <select id="nilaiJenis">
+                        <option>Tugas</option>
+                        <option>Ulangan Harian</option>
+                        <option>UTS</option>
+                        <option>UAS</option>
+                    </select>
+                </div>
+                <div>
+                    <label>Nilai</label>
+                    <input type="number" id="nilaiAngka" min="0" max="100" placeholder="0 - 100">
+                </div>
+            </div>
+ 
+            <div class="row">
+                <div>
+                    <label>Tanggal</label>
+                    <input type="date" id="nilaiTanggal">
+                </div>
+            </div>
+ 
+            <button onclick="simpanNilai()">Simpan Nilai</button>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nama</th>
+                        <th>Kelas</th>
+                        <th>Mata Pelajaran</th>
+                        <th>Semester</th>
+                        <th>Jenis</th>
+                        <th>Nilai</th>
+                        <th>Keterangan</th>
+                        <th>Tanggal</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody id="daftarNilaiGuru">
+                    <tr><td colspan="9">Belum ada data nilai</td></tr>
+                </tbody>
+            </table>
+
+            <button onclick="downloadNilaiGuru()" style="margin-top:10px;">
+                ⬇️ Download Data Nilai
+            </button>
+
+            <button class="reset-btn" onclick="resetNilai()" style="margin-top:10px;">
+                Reset Semua Nilai
+            </button>
+        </div>
+    </div>
+ 
+    <div class="menu-konten" id="menuKontenAbsensi" style="display:none;">
+        <table>
+            <thead>
+                <tr>
+                    <th>Nama</th>
+                    <th>Kelas</th>
+                    <th>Tanggal</th>
+                    <th>Mata Pelajaran</th>
+                    <th>Pertemuan</th>
+                    <th>Waktu</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+ 
+            <tbody id="dataAbsensi"></tbody>
+        </table>
+ 
+        <br><br>
+ 
+        <button onclick="downloadData()">
+            Download Data Absensi
+        </button>
+ 
+        <button class="reset-btn" onclick="resetAbsensi()">
+            Reset Semua Absensi
+        </button>
+    </div>
+ 
+    <button onclick="logout()" style="margin-top:15px;">
+        Logout
+    </button>
+</div>
+ 
+<!-- HALAMAN ADMIN -->
+<div class="container lebar" id="halamanAdmin" style="display:none;">
+    <h2>🛠️ PANEL ADMIN</h2>
+    <p style="text-align:center;color:#f8fafc;font-size:14px;margin-top:-8px;">Kontrol penuh atas seluruh data sistem absensi</p>
+
+    <div class="menu-bar">
+        <button class="menu-btn aktif" id="menuBtnAdminDash" onclick="gantiMenuAdmin('dash')">📊 Dashboard</button>
+        <button class="menu-btn" id="menuBtnAdminKelas" onclick="gantiMenuAdmin('kelas')">🏫 Kelola Kelas</button>
+        <button class="menu-btn" id="menuBtnAdminSiswa" onclick="gantiMenuAdmin('siswa')">👥 Kelola Siswa</button>
+        <button class="menu-btn" id="menuBtnAdminMapel" onclick="gantiMenuAdmin('mapel')">📚 Kelola Mapel</button>
+        <button class="menu-btn" id="menuBtnAdminSesi" onclick="gantiMenuAdmin('sesi')">🗂️ Kelola Sesi</button>
+        <button class="menu-btn" id="menuBtnAdminAbsensi" onclick="gantiMenuAdmin('absensi')">📋 Kelola Absensi</button>
+        <button class="menu-btn" id="menuBtnAdminNilai" onclick="gantiMenuAdmin('nilai')">📝 Kelola Nilai</button>
+        <button class="menu-btn" id="menuBtnAdminSistem" onclick="gantiMenuAdmin('sistem')">⚙️ Sistem</button>
+    </div>
+
+    <!-- DASHBOARD -->
+    <div class="menu-konten" id="adminKontenDash">
+        <div class="sesi-panel">
+            <h3>📊 Ringkasan Sistem</h3>
+            <div class="row" style="flex-wrap:wrap;">
+                <div style="min-width:150px;text-align:center;background:#eef4ff;border-radius:12px;padding:15px;margin:5px;">
+                    <div style="font-size:26px;font-weight:bold;color:#0d6efd;" id="statTotalSiswa">0</div>
+                    <div style="color:#333;font-size:13px;">Total Siswa (Master)</div>
+                </div>
+                <div style="min-width:150px;text-align:center;background:#eafaf1;border-radius:12px;padding:15px;margin:5px;">
+                    <div style="font-size:26px;font-weight:bold;color:#198754;" id="statTotalAkun">0</div>
+                    <div style="color:#333;font-size:13px;">Akun Terdaftar</div>
+                </div>
+                <div style="min-width:150px;text-align:center;background:#fff8e5;border-radius:12px;padding:15px;margin:5px;">
+                    <div style="font-size:26px;font-weight:bold;color:#997404;" id="statSesiAktif">0</div>
+                    <div style="color:#333;font-size:13px;">Sesi Presensi Aktif</div>
+                </div>
+                <div style="min-width:150px;text-align:center;background:#f3eefe;border-radius:12px;padding:15px;margin:5px;">
+                    <div style="font-size:26px;font-weight:bold;color:#6f42c1;" id="statTotalAbsensi">0</div>
+                    <div style="color:#333;font-size:13px;">Total Data Absensi</div>
+                </div>
+                <div style="min-width:150px;text-align:center;background:#fdeef0;border-radius:12px;padding:15px;margin:5px;">
+                    <div style="font-size:26px;font-weight:bold;color:#dc3545;" id="statTotalNilai">0</div>
+                    <div style="color:#333;font-size:13px;">Total Data Nilai</div>
+                </div>
+            </div>
+
+            <hr>
+            <h3>🏫 Ringkasan per Kelas</h3>
+            <table>
+                <thead>
+                    <tr><th>Kelas</th><th>Siswa Master</th><th>Punya Akun</th><th>Belum Akun</th><th>Mapel</th></tr>
+                </thead>
+                <tbody id="adminRingkasanKelas"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- KELOLA KELAS (BARU) -->
+    <div class="menu-konten" id="adminKontenKelas" style="display:none;">
+        <div class="sesi-panel">
+            <h3>➕ Tambah Kelas Baru</h3>
+            <p style="color:#666;font-size:13px;">Kelas yang ditambahkan di sini akan otomatis muncul di semua form (Daftar Akun Siswa, Input Nilai, Scan Presensi, dll) di seluruh sistem.</p>
+            <div class="row">
+                <div>
+                    <label>Nama Kelas</label>
+                    <input type="text" id="adminKelasNama" placeholder="Contoh: MIPA XIII">
+                </div>
+            </div>
+            <button onclick="adminTambahKelas()" style="background:#198754;">Tambah Kelas</button>
+            <div id="adminKelasPesan" style="display:none;background:#fff3cd;color:#856404;padding:10px;border-radius:10px;text-align:center;font-weight:bold;margin:10px 0;"></div>
+
+            <hr>
+            <h3>🏫 Daftar Kelas</h3>
+            <p style="color:#666;font-size:13px;">Kelas hanya bisa diubah nama atau dihapus di sini oleh admin. Kelas yang masih memiliki siswa master tidak bisa dihapus — kosongkan / pindahkan siswanya terlebih dahulu di menu Kelola Siswa.</p>
+            <table>
+                <thead>
+                    <tr><th>Nama Kelas</th><th>Jumlah Siswa Master</th><th>Aksi</th></tr>
+                </thead>
+                <tbody id="adminDaftarKelas"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- KELOLA SISWA -->
+    <div class="menu-konten" id="adminKontenSiswa" style="display:none;">
+        <div class="sesi-panel">
+            <h3>➕ Tambah Siswa Baru ke Daftar Master</h3>
+            <p style="color:#666;font-size:13px;">Siswa yang ditambahkan di sini akan otomatis muncul di form Daftar Akun Siswa dan Input Nilai Guru.</p>
+            <div class="row">
+                <div>
+                    <label>Kelas</label>
+                    <select id="adminSiswaKelas">
+                        <option value="">Pilih Kelas</option>
+                    </select>
+                </div>
+                <div>
+                    <label>Nama Siswa</label>
+                    <input type="text" id="adminSiswaNama" placeholder="Nama lengkap siswa">
+                </div>
+            </div>
+            <button onclick="adminTambahSiswa()" style="background:#198754;">Tambah Siswa</button>
+            <div id="adminSiswaPesan" style="display:none;background:#fff3cd;color:#856404;padding:10px;border-radius:10px;text-align:center;font-weight:bold;margin:10px 0;"></div>
+
+            <hr>
+            <h3>👥 Daftar Siswa &amp; Status Akun (Terpisah per Kelas)</h3>
+            <div id="adminDaftarSiswaWrap"></div>
+        </div>
+    </div>
+
+    <!-- KELOLA MAPEL -->
+    <div class="menu-konten" id="adminKontenMapel" style="display:none;">
+        <div class="sesi-panel">
+            <h3>➕ Tambah Mata Pelajaran</h3>
+            <div class="row">
+                <div>
+                    <label>Kelas</label>
+                    <select id="adminMapelKelas">
+                        <option value="">Pilih Kelas</option>
+                    </select>
+                </div>
+                <div>
+                    <label>Nama Mata Pelajaran</label>
+                    <input type="text" id="adminMapelNama" placeholder="Contoh: Bahasa Inggris">
+                </div>
+            </div>
+            <button onclick="adminTambahMapel()" style="background:#198754;">Tambah Mata Pelajaran</button>
+            <div id="adminMapelPesan" style="display:none;background:#fff3cd;color:#856404;padding:10px;border-radius:10px;text-align:center;font-weight:bold;margin:10px 0;"></div>
+
+            <hr>
+            <h3>📚 Daftar Mata Pelajaran per Kelas</h3>
+            <table>
+                <thead>
+                    <tr><th>Kelas</th><th>Mata Pelajaran</th><th>Aksi</th></tr>
+                </thead>
+                <tbody id="adminDaftarMapel"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- KELOLA SESI -->
+    <div class="menu-konten" id="adminKontenSesi" style="display:none;">
+        <div class="sesi-panel">
+            <h3>🗂️ Semua Sesi Presensi</h3>
+            <p style="color:#666;font-size:13px;">Pantau dan tutup paksa sesi presensi kelas mana pun, tanpa perlu login sebagai guru.</p>
+            <table>
+                <thead>
+                    <tr><th>Kelas</th><th>Mapel</th><th>Pertemuan</th><th>Tanggal</th><th>Waktu</th><th>Status</th><th>Aksi</th></tr>
+                </thead>
+                <tbody id="adminDaftarSesi"></tbody>
+            </table>
+            <button class="reset-btn" onclick="adminTutupSemuaSesi()" style="margin-top:10px;">Tutup Semua Sesi Aktif</button>
+        </div>
+    </div>
+
+    <!-- KELOLA ABSENSI -->
+    <div class="menu-konten" id="adminKontenAbsensi" style="display:none;">
+        <div class="sesi-panel">
+            <h3>📋 Semua Data Absensi</h3>
+            <div class="row">
+                <div>
+                    <label>Filter Kelas</label>
+                    <select id="adminAbsensiFilterKelas" onchange="renderAdminAbsensi()">
+                        <option value="">Semua Kelas</option>
+                    </select>
+                </div>
+            </div>
+            <table>
+                <thead>
+                    <tr><th>Nama</th><th>Kelas</th><th>Mapel</th><th>Pertemuan</th><th>Tanggal</th><th>Waktu</th><th>Status</th><th>Aksi</th></tr>
+                </thead>
+                <tbody id="adminDaftarAbsensi"></tbody>
+            </table>
+            <button onclick="downloadData()" style="margin-top:10px;">⬇️ Download Semua Data Absensi</button>
+        </div>
+    </div>
+
+    <!-- KELOLA NILAI -->
+    <div class="menu-konten" id="adminKontenNilai" style="display:none;">
+        <div class="sesi-panel">
+            <h3>📝 Semua Data Nilai</h3>
+            <div class="row">
+                <div>
+                    <label>Filter Kelas</label>
+                    <select id="adminNilaiFilterKelas" onchange="renderAdminNilai()">
+                        <option value="">Semua Kelas</option>
+                    </select>
+                </div>
+            </div>
+            <table>
+                <thead>
+                    <tr><th>Nama</th><th>Kelas</th><th>Mapel</th><th>Semester</th><th>Jenis</th><th>Nilai</th><th>Ket.</th><th>Tanggal</th><th>Aksi</th></tr>
+                </thead>
+                <tbody id="adminDaftarNilai"></tbody>
+            </table>
+            <button onclick="downloadNilaiGuru()" style="margin-top:10px;">⬇️ Download Semua Data Nilai</button>
+        </div>
+    </div>
+
+    <!-- SISTEM / MAINTENANCE -->
+    <div class="menu-konten" id="adminKontenSistem" style="display:none;">
+        <div class="sesi-panel">
+            <h3>⚙️ Perawatan Sistem</h3>
+            <p style="color:#666;font-size:13px;">Alat bantu untuk memeriksa dan memperbaiki data yang tidak konsisten (misalnya data absensi/nilai milik akun yang sudah dihapus), tanpa mengubah kode program.</p>
+
+            <button onclick="adminPeriksaData()">🔍 Periksa Kesalahan Data</button>
+            <div id="adminPeriksaHasil" style="display:none;background:#eef4ff;color:#222;padding:12px;border-radius:10px;margin:10px 0;text-align:left;"></div>
+
+            <hr>
+            <h3>💾 Cadangkan &amp; Pulihkan Data</h3>
+            <p style="color:#666;font-size:13px;">Backup seluruh data (siswa, akun, sesi, absensi, nilai, mapel tambahan) ke satu file, atau pulihkan dari file backup.</p>
+            <button onclick="adminBackupData()" style="background:#198754;">⬇️ Download Backup Semua Data</button>
+
+            <label style="margin-top:10px;">Pulihkan dari File Backup</label>
+            <input type="file" id="adminRestoreFile" accept="application/json">
+            <button onclick="adminRestoreData()" style="background:#6f42c1;">⬆️ Pulihkan Data dari File</button>
+            <div id="adminSistemPesan" style="display:none;background:#fff3cd;color:#856404;padding:10px;border-radius:10px;text-align:center;font-weight:bold;margin:10px 0;"></div>
+
+            <hr>
+            <h3 style="color:#dc3545;">⚠️ Zona Berbahaya</h3>
+            <button class="reset-btn" onclick="adminResetSemua()">Hapus SEMUA Data (Reset Total Sistem)</button>
+        </div>
+    </div>
+
+    <button onclick="logout()" style="margin-top:15px;">Logout</button>
+</div>
+
+<!-- MODAL DAFTAR PRESENSI PER MAPEL -->
+<div class="modal-overlay" id="modalPresensi">
+    <div class="modal-box">
+        <button class="modal-close" onclick="tutupModal()">✕ Tutup</button>
+ 
+        <h2 id="modalJudul">Daftar Presensi</h2>
+        <p id="modalSubjudul" style="color:#666;margin-top:-10px;"></p>
+ 
+        <table>
+            <thead>
+                <tr>
+                    <th>Pertemuan Ke</th>
+                    <th>Tanggal</th>
+                    <th>Waktu</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody id="modalIsi">
+                <tr><td colspan="4">Belum ada data presensi</td></tr>
+            </tbody>
+        </table>
+ 
+        <hr>
+ 
+        <h3>📝 Konfirmasi Presensi</h3>
+ 
+        <div id="modalInfoSesi" class="info-sesi" style="display:none;">
+            <p>📅 <strong>Pertemuan Ke:</strong> <span id="infoPertemuan">-</span></p>
+            <p>🗓️ <strong>Tanggal:</strong> <span id="infoTanggal">-</span></p>
+            <p>⏰ <strong>Waktu:</strong> <span id="infoWaktu">-</span></p>
+        </div>
+ 
+        <div id="modalFormKonfirmasi" style="display:none;">
+            <label>Status Kehadiran</label>
+            <select id="modalStatus">
+                <option>Hadir</option>
+                <option>Izin</option>
+                <option>Sakit</option>
+            </select>
+ 
+            <button onclick="simpanAbsensiModal()">
+                Konfirmasi Presensi
+            </button>
+        </div>
+ 
+        <div id="modalPesan" style="
+            display:none;
+            background:#fff3cd;
+            color:#856404;
+            padding:10px;
+            border-radius:10px;
+            text-align:center;
+            font-weight:bold;
+            margin:10px 0;">
+        </div>
     </div>
 </div>
-
-<!-- HALAMAN SISWA -->
-<div class="container" id="halamanSiswa">
-    <h2>Menu Absensi Siswa</h2>
-
-    <input type="text" id="nama" placeholder="Nama Siswa">
-
-    <input type="date" id="tanggal">
-
-    <input type="time" id="waktu"> 
-
-    <input type="text" id="mapel" placeholder="Mata Pelajaran">
-
-    <input type="number" id="pertemuan" placeholder="Pertemuan Ke-" min="1">
-
-    <select id="status">
-        <option>Hadir</option>
-        <option>Izin</option>
-        <option>Sakit</option>
-        <option>Alpha</option>
-    </select>
-
-    <button onclick="simpanAbsensi()">
-        Simpan Absensi
-    </button>
-
-    <button onclick="logout()">
-        Logout
-    </button>
-</div>
-
-<!-- HALAMAN GURU -->
-<div class="container" id="halamanGuru">
-    <h2>Data Absensi Siswa</h2>
-
-    <table>
-        <thead>
-            <tr>
-                <th>Nama</th>
-                <th>Tanggal</th>
-                <th>Mata Pelajaran</th>
-                <th>Pertemuan</th>
-                <th>Waktu</th>
-                <th>Status</th>
-            </tr>
-        </thead>
-
-        <tbody id="dataAbsensi"></tbody>
-    </table>
-
-    <br>
-
-    <button class="reset-btn" onclick="resetAbsensi()">
-    Reset Semua Absensi
-</button>
-
-<br><br>
-
-    <button onclick="logout()">
-        Logout
-    </button>
-</div>
-
+ 
+ 
 <script>
-
+ 
 let dataAbsensi = JSON.parse(localStorage.getItem("absensi")) || [];
+ 
+// sesi presensi yang dibuka guru: { "kelas||mapel": {kelas,mapel,pertemuan,tanggal,waktu,terbuka} }
+let sesiPresensi = JSON.parse(localStorage.getItem("sesiPresensi")) || {};
+ 
+// akun siswa yang sudah terdaftar: [{kelas, nama, username, password}]
+let akunSiswa = JSON.parse(localStorage.getItem("akunSiswa")) || [];
+ 
+// data nilai siswa yang diinput guru: [{kelas, nama, mapel, jenis, nilai, tanggal}]
+let dataNilai = JSON.parse(localStorage.getItem("dataNilai")) || [];
+ 
+// data siswa yang sedang login (diisi otomatis dari akun)
+let siswaLogin = { kelas:"", nama:"", username:"" };
+ 
+// menyimpan konteks mapel yang sedang dibuka di modal
+let modalAktif = { kelas:"", nama:"", mapel:"" };
 
-function login(){
+// key sesi yang sedang aktif di-scan oleh guru
+let scanSesiAktifKey = "";
 
-    let role = document.getElementById("role").value;
-    let username = document.getElementById("username").value;
-    let password = document.getElementById("password").value;
+// username pemilik QR yang baru saja dibuat saat registrasi (untuk tombol download)
+let usernameQRBaru = "";
 
-    if(role=="siswa" && username=="siswa" && password=="123"){
-        document.getElementById("halamanLogin").style.display="none";
-        document.getElementById("halamanSiswa").style.display="block";
+// ====== DAFTAR KELAS (HANYA ADMIN YANG BOLEH MENAMBAH / MENGUBAH) ======
+// Ini sekarang menjadi SATU-SATUNYA sumber daftar kelas untuk seluruh sistem.
+// Semua dropdown "Kelas" di halaman Siswa, Guru, dan Admin mengambil isinya dari sini.
+let daftarKelas = JSON.parse(localStorage.getItem("daftarKelas")) || [
+    "MIPA X","MIPA XI","MIPA XII","IPS X","IPS XI","IPS XII"
+];
+
+function simpanDaftarKelas(){
+    localStorage.setItem("daftarKelas", JSON.stringify(daftarKelas));
+}
+ 
+function kunciSesi(kelas, mapel){
+    return kelas + "||" + mapel;
+}
+ 
+function simpanSesi(){
+    localStorage.setItem("sesiPresensi", JSON.stringify(sesiPresensi));
+}
+ 
+function simpanAkunSiswa(){
+    localStorage.setItem("akunSiswa", JSON.stringify(akunSiswa));
+}
+ 
+function simpanDataNilai(){
+    localStorage.setItem("dataNilai", JSON.stringify(dataNilai));
+}
+ 
+// ====== MENU BAR NAVIGASI HALAMAN GURU ======
+function gantiMenuGuru(menu){
+ 
+    // matikan kamera kalau pindah dari tab scan
+    if(menu !== "scan"){
+        stopScan();
     }
-
-    else if(role=="guru" && username=="guru" && password=="123"){
-        document.getElementById("halamanLogin").style.display="none";
-        document.getElementById("halamanGuru").style.display="block";
-
-        tampilkanData();
-    }
-
-    else{
-        alert("Username atau Password Salah!");
+ 
+    document.getElementById("menuKontenScan").style.display = menu === "scan" ? "block" : "none";
+    document.getElementById("menuKontenNilaiGuru").style.display = menu === "nilai" ? "block" : "none";
+    document.getElementById("menuKontenAbsensi").style.display = menu === "absensi" ? "block" : "none";
+ 
+    document.getElementById("menuBtnScan").classList.toggle("aktif", menu === "scan");
+    document.getElementById("menuBtnNilaiGuru").classList.toggle("aktif", menu === "nilai");
+    document.getElementById("menuBtnAbsensi").classList.toggle("aktif", menu === "absensi");
+ 
+    if(menu === "scan"){
+        renderSesiAktif();
     }
 }
+ 
+// ====== MENU BAR NAVIGASI HALAMAN SISWA ======
+function gantiMenuSiswa(menu){
+ 
+    document.getElementById("menuKontenPresensi").style.display = menu === "presensi" ? "block" : "none";
+    document.getElementById("menuKontenQR").style.display = menu === "qr" ? "block" : "none";
+    document.getElementById("menuKontenNilai").style.display = menu === "nilai" ? "block" : "none";
+ 
+    document.getElementById("menuBtnPresensi").classList.toggle("aktif", menu === "presensi");
+    document.getElementById("menuBtnQR").classList.toggle("aktif", menu === "qr");
+    document.getElementById("menuBtnNilai").classList.toggle("aktif", menu === "nilai");
+}
+ 
+// Daftar master nama siswa per kelas.
+// SENGAJA DIKOSONGKAN: semua nama siswa sekarang ditambahkan lewat
+// halaman Admin > Kelola Siswa, bukan ditulis langsung di kode ini.
+// Baris "====================" hanya penanda pemisah (diabaikan sistem), jangan dihapus.
+// Dibuat dinamis mengikuti daftarKelas (yang hanya bisa diubah oleh Admin).
+let dataSiswa = {};
+daftarKelas.forEach(function(kelas){
+    dataSiswa[kelas] = ["===================="];
+});
+ 
+// ====== REGISTRASI AKUN SISWA ======
+function tampilkanNamaRegister(){
+ 
+    let kelas = document.getElementById("regKelas").value;
+    let namaSelect = document.getElementById("regNama");
+ 
+    namaSelect.innerHTML = '<option value="">Pilih Nama Siswa</option>';
+ 
+    if(!dataSiswa[kelas]) return;
+ 
+    dataSiswa[kelas].forEach(function(siswa){
+ 
+        // lewati baris pemisah "===="
+        if(siswa.startsWith("=")) return;
+ 
+        // sembunyikan nama yang sudah punya akun terdaftar
+        let sudahDaftar = akunSiswa.some(a =>
+            a.kelas === kelas && a.nama === siswa
+        );
+ 
+        if(sudahDaftar) return;
+ 
+        namaSelect.innerHTML += `<option value="${siswa}">${siswa}</option>`;
+    });
+}
+ 
+function bukaRegister(){
+    document.getElementById("halamanLogin").style.display = "none";
+    document.getElementById("halamanRegister").style.display = "block";
+}
+ 
+function tutupRegister(){
+    document.getElementById("halamanRegister").style.display = "none";
+    document.getElementById("halamanLogin").style.display = "block";
+ 
+    document.getElementById("regKelas").value = "";
+    document.getElementById("regNama").innerHTML = '<option value="">Pilih Kelas dulu</option>';
+    document.getElementById("regUsername").value = "";
+    document.getElementById("regPassword").value = "";
+    document.getElementById("regKonfirmasi").value = "";
+    document.getElementById("regPesan").style.display = "none";
+ 
+    document.getElementById("formRegisterIsi").style.display = "block";
+    document.getElementById("qrBaruWrap").style.display = "none";
+    document.getElementById("qrcodeBaru").innerHTML = "";
+    usernameQRBaru = "";
+}
+ 
+function lanjutDariQRBaru(){
+    tutupRegister();
+}
+ 
+function daftarAkun(){
+ 
+    let kelas = document.getElementById("regKelas").value;
+    let nama = document.getElementById("regNama").value;
+    let username = document.getElementById("regUsername").value.trim();
+    let password = document.getElementById("regPassword").value;
+    let konfirmasi = document.getElementById("regKonfirmasi").value;
+ 
+    let pesan = document.getElementById("regPesan");
+    pesan.style.background = "#fff3cd";
+    pesan.style.color = "#856404";
+ 
+    if(kelas=="" || nama=="" || username=="" || password=="" || konfirmasi==""){
+        pesan.innerHTML = "⚠ Lengkapi semua data terlebih dahulu!";
+        pesan.style.display = "block";
+        return;
+    }
+ 
+    if(password !== konfirmasi){
+        pesan.innerHTML = "⚠ Konfirmasi password tidak cocok!";
+        pesan.style.display = "block";
+        return;
+    }
+ 
+    let usernameDipakai = akunSiswa.some(a => a.username === username)
+        || username === "guru";
+ 
+    if(usernameDipakai){
+        pesan.innerHTML = "⚠ Username sudah dipakai, gunakan username lain!";
+        pesan.style.display = "block";
+        return;
+    }
+ 
+    let namaSudahDaftar = akunSiswa.some(a =>
+        a.kelas === kelas && a.nama === nama
+    );
+ 
+    if(namaSudahDaftar){
+        pesan.innerHTML = "⚠ Nama ini sudah memiliki akun!";
+        pesan.style.display = "block";
+        return;
+    }
+ 
+    akunSiswa.push({
+        kelas: kelas,
+        nama: nama,
+        username: username,
+        password: password
+    });
+ 
+    simpanAkunSiswa();
+ 
+    document.getElementById("formRegisterIsi").style.display = "none";
+    document.getElementById("qrBaruWrap").style.display = "block";
 
-function simpanAbsensi(){
+    usernameQRBaru = username;
+ 
+    document.getElementById("qrcodeBaru").innerHTML = "";
+    new QRCode(document.getElementById("qrcodeBaru"), {
+        text: "SISWA|" + username,
+        width: 220,
+        height: 220,
+        colorDark: "#0d6efd",
+        colorLight: "#ffffff",
+        correctLevel: QRCode.CorrectLevel.M
+    });
+}
+ 
+// Daftar mata pelajaran per jurusan (MIPA / IPS)
+function daftarMapelKelas(kelas){
+ 
+    if(kelas.includes("MIPA")){
+        return ["Matematika","Fisika","Kimia","Biologi"];
+    }
+ 
+    if(kelas.includes("IPS")){
+        return ["Ekonomi","Geografi","Sosiologi","Sejarah"];
+    }
+ 
+    return [];
+}
+ 
+// ====== PANEL GURU: SCAN QR — ISI MAPEL SESUAI KELAS ======
+function isiScanMapel(){
+ 
+    let kelas = document.getElementById("scanKelas").value;
+    let mapelSelect = document.getElementById("scanMapel");
+ 
+    mapelSelect.innerHTML = '<option value="">Pilih Mata Pelajaran</option>';
+ 
+    daftarMapelKelas(kelas).forEach(function(mapel){
+        mapelSelect.innerHTML += `<option>${mapel}</option>`;
+    });
 
-    let nama = document.getElementById("nama").value;
-    let tanggal = document.getElementById("tanggal").value;
-    let mapel = document.getElementById("mapel").value;
-    let pertemuan = document.getElementById("pertemuan").value;
-    let waktu = document.getElementById("waktu").value;
-    let status = document.getElementById("status").value;
+    cekSesiUntukScan();
+}
 
-    if(nama=="" || tanggal=="" || mapel=="" || pertemuan=="" || waktu==""){
-        alert("Lengkapi data terlebih dahulu!");
+// ====== CEK STATUS SESI UNTUK KELAS+MAPEL YANG DIPILIH DI PANEL SCAN ======
+function cekSesiUntukScan(){
+
+    let kelas = document.getElementById("scanKelas").value;
+    let mapel = document.getElementById("scanMapel").value;
+    let info = document.getElementById("statusSesiUntukScan");
+
+    if(kelas=="" || mapel==""){
+        info.innerHTML = "Pilih Kelas &amp; Mata Pelajaran di atas untuk memulai scan pada sesi yang sudah dibuka.";
+        info.style.color = "#666";
         return;
     }
 
-    dataAbsensi.push({
-    nama:nama,
-    tanggal:tanggal,
-    mapel:mapel,
-    pertemuan:pertemuan,
-    waktu:waktu,
-    status:status
-    });
+    let sesi = sesiPresensi[kunciSesi(kelas, mapel)];
 
-    localStorage.setItem(
-        "absensi",
-        JSON.stringify(dataAbsensi)
-    );
-
-    alert("Absensi berhasil disimpan");
-
-    document.getElementById("nama").value="";
-    document.getElementById("tanggal").value="";
-    document.getElementById("waktu").value="";
-    document.getElementById("pertemuan").value="";
-    document.getElementById("mapel").value="";
+    if(sesi && sesi.terbuka){
+        info.innerHTML = `🟢 Sesi <strong>${mapel} - ${kelas}</strong> sudah dibuka (Pertemuan ${sesi.pertemuan}, ${sesi.tanggal} ${sesi.waktu}). Siap untuk mulai scan.`;
+        info.style.color = "#198754";
+    } else {
+        info.innerHTML = `🔴 Sesi untuk <strong>${mapel} - ${kelas}</strong> belum dibuka. Klik "Buka Sesi Presensi" dulu di atas sebelum mulai scan.`;
+        info.style.color = "#dc3545";
+    }
 }
+ 
+function tutupSesi(key){
+ 
+    if(!confirm("Tutup sesi presensi ini?")) return;
+ 
+    delete sesiPresensi[key];
+    simpanSesi();
+    renderSesiAktif();
+    cekSesiUntukScan();
 
-function tampilkanData(){
-
-    let tbody = document.getElementById("dataAbsensi");
-
-    tbody.innerHTML="";
-
-    dataAbsensi.forEach((item,index)=>{
-
+    if(scanSesiAktifKey === key){
+        stopScan();
+    }
+}
+ 
+function renderSesiAktif(){
+ 
+    let tbody = document.getElementById("daftarSesiAktif");
+    let entri = Object.entries(sesiPresensi).filter(([k, s]) => s.terbuka);
+ 
+    if(entri.length === 0){
+        tbody.innerHTML = `<tr><td colspan="6">Belum ada sesi presensi yang dibuka</td></tr>`;
+        return;
+    }
+ 
+    tbody.innerHTML = "";
+ 
+    entri.forEach(([key, sesi]) => {
         tbody.innerHTML += `
-        <tr>
-            <td>${item.nama}</td>
-            <td>${item.tanggal}</td>
-            <td>${item.mapel}</td>
-            <td>${item.pertemuan}</td>
-            <td>${item.waktu}</td>
-            <td>${item.status}</td>
-        </tr>
+            <tr>
+                <td>${sesi.kelas}</td>
+                <td>${sesi.mapel}</td>
+                <td>${sesi.pertemuan}</td>
+                <td>${sesi.tanggal}</td>
+                <td>${sesi.waktu}</td>
+                <td><button class="tutup-btn" onclick="tutupSesi('${key}')">Tutup</button></td>
+            </tr>
         `;
     });
 }
 
-function resetAbsensi(){
+// ====== LANGKAH 1: BUKA SESI PRESENSI (TANPA MENYALAKAN KAMERA) ======
+function bukaSesiPresensi(){
 
-    if(confirm("Yakin ingin menghapus semua data absensi?")){
+    let kelas = document.getElementById("scanKelas").value;
+    let mapel = document.getElementById("scanMapel").value;
+    let pertemuan = document.getElementById("scanPertemuan").value;
+    let tanggal = document.getElementById("scanTanggal").value;
+    let waktu = document.getElementById("scanWaktu").value;
 
-        localStorage.removeItem("absensi");
+    let pesan = document.getElementById("sesiPesan");
+    pesan.style.background = "#fff3cd";
+    pesan.style.color = "#856404";
 
-        dataAbsensi = [];
+    if(kelas=="" || mapel=="" || pertemuan=="" || tanggal=="" || waktu==""){
+        pesan.innerHTML = "⚠ Lengkapi Kelas, Mata Pelajaran, Pertemuan, Tanggal, dan Waktu terlebih dahulu!";
+        pesan.style.display = "block";
+        return;
+    }
 
+    let key = kunciSesi(kelas, mapel);
+
+    sesiPresensi[key] = {
+        kelas: kelas,
+        mapel: mapel,
+        pertemuan: pertemuan,
+        tanggal: tanggal,
+        waktu: waktu,
+        terbuka: true
+    };
+
+    simpanSesi();
+    renderSesiAktif();
+    cekSesiUntukScan();
+
+    pesan.style.background = "#d4edda";
+    pesan.style.color = "#155724";
+    pesan.innerHTML = `✅ Sesi presensi <strong>${mapel} - ${kelas}</strong> (Pertemuan ${pertemuan}) berhasil dibuka. Sekarang lanjut ke bagian "Scan QR Presensi Siswa" untuk mulai scan.`;
+    pesan.style.display = "block";
+}
+ 
+// ====== PANEL GURU: INPUT NILAI SISWA ======
+function isiFormNilai(){
+ 
+    let kelas = document.getElementById("nilaiKelas").value;
+    let namaSelect = document.getElementById("nilaiNama");
+    let mapelSelect = document.getElementById("nilaiMapel");
+ 
+    namaSelect.innerHTML = '<option value="">Pilih Nama Siswa</option>';
+    mapelSelect.innerHTML = '<option value="">Pilih Mata Pelajaran</option>';
+ 
+    if(!kelas || !dataSiswa[kelas]) return;
+ 
+    dataSiswa[kelas].forEach(function(siswa){
+ 
+        // lewati baris pemisah "===="
+        if(siswa.startsWith("=")) return;
+ 
+        namaSelect.innerHTML += `<option value="${siswa}">${siswa}</option>`;
+    });
+ 
+    daftarMapelKelas(kelas).forEach(function(mapel){
+        mapelSelect.innerHTML += `<option>${mapel}</option>`;
+    });
+}
+ 
+function simpanNilai(){
+ 
+    let kelas = document.getElementById("nilaiKelas").value;
+    let nama = document.getElementById("nilaiNama").value;
+    let mapel = document.getElementById("nilaiMapel").value;
+    let semester = document.getElementById("nilaiSemester").value;
+    let jenis = document.getElementById("nilaiJenis").value;
+    let nilai = document.getElementById("nilaiAngka").value;
+    let tanggal = document.getElementById("nilaiTanggal").value;
+ 
+    if(kelas=="" || nama=="" || mapel=="" || semester=="" || jenis=="" || nilai=="" || tanggal==""){
+        alert("Lengkapi semua data nilai terlebih dahulu!");
+        return;
+    }
+ 
+    if(Number(nilai) < 0 || Number(nilai) > 100){
+        alert("Nilai harus di antara 0 - 100!");
+        return;
+    }
+ 
+    dataNilai.push({
+        kelas: kelas,
+        nama: nama,
+        mapel: mapel,
+        semester: semester,
+        jenis: jenis,
+        nilai: nilai,
+        tanggal: tanggal
+    });
+ 
+    simpanDataNilai();
+    renderNilaiGuru();
+ 
+    alert("Nilai " + nama + " berhasil disimpan!");
+ 
+    document.getElementById("nilaiAngka").value = "";
+    document.getElementById("nilaiTanggal").value = "";
+}
+ 
+function hapusNilai(index){
+ 
+    if(!confirm("Hapus data nilai ini?")) return;
+ 
+    dataNilai.splice(index, 1);
+    simpanDataNilai();
+    renderNilaiGuru();
+}
+ 
+function renderNilaiGuru(){
+ 
+    let tbody = document.getElementById("daftarNilaiGuru");
+ 
+    if(dataNilai.length === 0){
+        tbody.innerHTML = `<tr><td colspan="9">Belum ada data nilai</td></tr>`;
+        return;
+    }
+ 
+    tbody.innerHTML = "";
+ 
+    dataNilai.forEach((item, index) => {
+        tbody.innerHTML += `
+            <tr>
+                <td>${item.nama}</td>
+                <td>${item.kelas}</td>
+                <td>${item.mapel}</td>
+                <td>${item.semester || "-"}</td>
+                <td>${item.jenis}</td>
+                <td>${item.nilai}</td>
+                <td>${badgeKeterangan(item.nilai)}</td>
+                <td>${item.tanggal}</td>
+                <td><button class="tutup-btn" onclick="hapusNilai(${index})">Hapus</button></td>
+            </tr>
+        `;
+    });
+}
+ 
+function resetNilai(){
+ 
+    if(confirm("Yakin ingin menghapus semua data nilai?")){
+ 
+        localStorage.removeItem("dataNilai");
+ 
+        dataNilai = [];
+ 
+        renderNilaiGuru();
+ 
+        alert("Semua data nilai berhasil dihapus");
+    }
+}
+ 
+function login(){
+ 
+    let role = document.getElementById("role").value;
+    let username = document.getElementById("username").value.trim();
+    let password = document.getElementById("password").value;
+ 
+    if(role=="siswa"){
+ 
+        let akun = akunSiswa.find(a =>
+            a.username === username && a.password === password
+        );
+ 
+        if(akun){
+            siswaLogin = { kelas: akun.kelas, nama: akun.nama, username: akun.username };
+ 
+            document.getElementById("halamanLogin").style.display="none";
+            document.getElementById("halamanSiswa").style.display="block";
+ 
+            document.getElementById("salamSiswa").innerText =
+                "Halo, " + akun.nama + " — Kelas " + akun.kelas;
+ 
+            tampilkanDaftarMapel();
+            tampilkanNilaiSiswa();
+            tampilkanQRSiswa();
+            gantiMenuSiswa('presensi');
+        } else {
+            alert("Username atau Password Salah! Belum punya akun? Klik Daftar Akun Siswa.");
+        }
+    }
+ 
+    else if(role=="guru" && username=="guru" && password=="123"){
+        document.getElementById("halamanLogin").style.display="none";
+        document.getElementById("halamanGuru").style.display="block";
+ 
         tampilkanData();
+        renderSesiAktif();
+        renderNilaiGuru();
+        cekSesiUntukScan();
+        gantiMenuGuru('scan');
+    }
 
+    else if(role=="admin" && username===akunAdmin.username && password===akunAdmin.password){
+        document.getElementById("halamanLogin").style.display="none";
+        document.getElementById("halamanAdmin").style.display="block";
+
+        gantiMenuAdmin('dash');
+    }
+ 
+    else{
+        alert("Username atau Password Salah!");
+    }
+}
+ 
+// ====== TABEL DAFTAR MAPEL (GAYA SIMARI) ======
+function tampilkanDaftarMapel(){
+ 
+    let kelas = siswaLogin.kelas;
+    let nama = siswaLogin.nama;
+    let wrap = document.getElementById("daftarMapelWrap");
+    let tbody = document.getElementById("daftarMapel");
+ 
+    tbody.innerHTML = "";
+ 
+    if(kelas=="" || nama==""){
+        wrap.style.display = "none";
+        return;
+    }
+ 
+    let mapelList = daftarMapelKelas(kelas);
+ 
+    mapelList.forEach(function(mapel, index){
+ 
+        let sesi = sesiPresensi[kunciSesi(kelas, mapel)];
+        let statusSesi;
+ 
+        if(sesi && sesi.terbuka){
+ 
+            let sudahIsi = dataAbsensi.some(item =>
+                item.nama === nama &&
+                item.kelas === kelas &&
+                item.mapel === mapel &&
+                item.pertemuan === sesi.pertemuan
+            );
+ 
+            statusSesi = sudahIsi
+                ? `<span class="badge badge-hadir">✔ Sudah Presensi (Pertemuan ${sesi.pertemuan})</span>`
+                : `<span style="color:#198754;font-weight:bold;">🟢 Terbuka - Pertemuan ${sesi.pertemuan}</span>`;
+        } else {
+            statusSesi = `<span style="color:#888;">🔴 Belum dibuka guru</span>`;
+        }
+ 
+        tbody.innerHTML += `
+            <tr>
+                <td>${index + 1}</td>
+                <td style="text-align:left;">${mapel}</td>
+                <td>${kelas}</td>
+                <td>${statusSesi}</td>
+                <td>
+                    <button class="btn-presensi" onclick="bukaModal('${mapel}')">
+                        Isi Presensi
+                    </button>
+                </td>
+            </tr>
+        `;
+    });
+ 
+    wrap.style.display = "block";
+}
+ 
+// ====== TABEL DAFTAR NILAI (HALAMAN SISWA) ======
+function tampilkanNilaiSiswa(){
+ 
+    let kelas = siswaLogin.kelas;
+    let nama = siswaLogin.nama;
+    let wrap = document.getElementById("daftarNilaiWrap");
+    let tbody = document.getElementById("daftarNilaiSiswa");
+ 
+    tbody.innerHTML = "";
+ 
+    if(kelas=="" || nama==""){
+        wrap.style.display = "none";
+        return;
+    }
+ 
+    let nilaiSaya = dataNilai.filter(item =>
+        item.nama === nama && item.kelas === kelas
+    );
+ 
+    wrap.style.display = "block";
+ 
+    if(nilaiSaya.length === 0){
+        tbody.innerHTML = `<tr><td colspan="6">Belum ada data nilai</td></tr>`;
+        return;
+    }
+ 
+    nilaiSaya.forEach(item => {
+        tbody.innerHTML += `
+            <tr>
+                <td style="text-align:left;">${item.mapel}</td>
+                <td>${item.semester || "-"}</td>
+                <td>${item.jenis}</td>
+                <td>${item.nilai}</td>
+                <td>${badgeKeterangan(item.nilai)}</td>
+                <td>${item.tanggal}</td>
+            </tr>
+        `;
+    });
+}
+ 
+function badgeStatus(status){
+ 
+    if(status === "Belum ada"){
+        return `<span style="color:#888;">Belum ada</span>`;
+    }
+ 
+    let kelasBadge = {
+        "Hadir":"badge-hadir",
+        "Izin":"badge-izin",
+        "Sakit":"badge-sakit",
+        "Alpha":"badge-alpha"
+    }[status] || "badge-hadir";
+ 
+    return `<span class="badge ${kelasBadge}">${status}</span>`;
+}
+ 
+// ====== KETERANGAN / PREDIKAT NILAI (A/B/C/D) ======
+function keteranganNilai(nilai){
+ 
+    let n = Number(nilai);
+ 
+    if(n >= 90) return "A";
+    if(n >= 80) return "B";
+    if(n >= 70) return "C";
+    return "D";
+}
+ 
+function badgeKeterangan(nilai){
+ 
+    let huruf = keteranganNilai(nilai);
+ 
+    let kelasBadge = {
+        "A":"badge-hadir",
+        "B":"badge-b",
+        "C":"badge-sakit",
+        "D":"badge-alpha"
+    }[huruf];
+ 
+    return `<span class="badge ${kelasBadge}">${huruf}</span>`;
+}
+ 
+// ====== MODAL PRESENSI PER MAPEL ======
+function bukaModal(mapel){
+ 
+    let kelas = siswaLogin.kelas;
+    let nama = siswaLogin.nama;
+ 
+    modalAktif = { kelas:kelas, nama:nama, mapel:mapel };
+ 
+    document.getElementById("modalJudul").innerText = mapel;
+    document.getElementById("modalSubjudul").innerText =
+        nama + " — " + kelas;
+ 
+    renderModalIsi();
+    renderStatusSesiModal();
+ 
+    document.getElementById("modalPresensi").classList.add("aktif");
+}
+ 
+function renderStatusSesiModal(){
+ 
+    let sesi = sesiPresensi[kunciSesi(modalAktif.kelas, modalAktif.mapel)];
+ 
+    let infoSesi = document.getElementById("modalInfoSesi");
+    let formKonfirmasi = document.getElementById("modalFormKonfirmasi");
+    let pesan = document.getElementById("modalPesan");
+ 
+    pesan.style.display = "none";
+    pesan.style.background = "#fff3cd";
+    pesan.style.color = "#856404";
+ 
+    // Sesi belum dibuka guru
+    if(!sesi || !sesi.terbuka){
+        infoSesi.style.display = "none";
+        formKonfirmasi.style.display = "none";
+ 
+        pesan.innerHTML = "⏳ Sesi presensi untuk mata pelajaran ini belum dibuka oleh guru.";
+        pesan.style.display = "block";
+        return;
+    }
+ 
+    // Tampilkan info sesi yang sedang dibuka guru
+    document.getElementById("infoPertemuan").innerText = sesi.pertemuan;
+    document.getElementById("infoTanggal").innerText = sesi.tanggal;
+    document.getElementById("infoWaktu").innerText = sesi.waktu;
+    infoSesi.style.display = "block";
+ 
+    // Cek apakah siswa sudah presensi di pertemuan ini
+    let sudahIsi = dataAbsensi.some(item =>
+        item.nama === modalAktif.nama &&
+        item.kelas === modalAktif.kelas &&
+        item.mapel === modalAktif.mapel &&
+        item.pertemuan === sesi.pertemuan
+    );
+ 
+    if(sudahIsi){
+        formKonfirmasi.style.display = "none";
+        pesan.innerHTML = "✅ Anda sudah presensi pada pertemuan ini.";
+        pesan.style.background = "#d4edda";
+        pesan.style.color = "#155724";
+        pesan.style.display = "block";
+    } else {
+        formKonfirmasi.style.display = "block";
+        document.getElementById("modalStatus").value = "Hadir";
+    }
+}
+ 
+function renderModalIsi(){
+ 
+    let tbody = document.getElementById("modalIsi");
+ 
+    let riwayat = dataAbsensi.filter(item =>
+        item.nama === modalAktif.nama &&
+        item.kelas === modalAktif.kelas &&
+        item.mapel === modalAktif.mapel
+    ).sort((a,b) => Number(a.pertemuan) - Number(b.pertemuan));
+ 
+    if(riwayat.length === 0){
+        tbody.innerHTML = `<tr><td colspan="4">Belum ada data presensi</td></tr>`;
+        return;
+    }
+ 
+    tbody.innerHTML = "";
+ 
+    riwayat.forEach(item => {
+        tbody.innerHTML += `
+            <tr>
+                <td>${item.pertemuan}</td>
+                <td>${item.tanggal}</td>
+                <td>${item.waktu}</td>
+                <td>${badgeStatus(item.status)}</td>
+            </tr>
+        `;
+    });
+}
+ 
+function tutupModal(){
+    document.getElementById("modalPresensi").classList.remove("aktif");
+}
+ 
+function simpanAbsensiModal(){
+ 
+    // ambil ulang data sesi dari storage supaya selalu sinkron dengan guru
+    let sesi = sesiPresensi[kunciSesi(modalAktif.kelas, modalAktif.mapel)];
+    let pesan = document.getElementById("modalPesan");
+ 
+    if(!sesi || !sesi.terbuka){
+        pesan.style.background = "#fff3cd";
+        pesan.style.color = "#856404";
+        pesan.innerHTML = "⏳ Sesi presensi sudah ditutup oleh guru.";
+        pesan.style.display = "block";
+        renderStatusSesiModal();
+        return;
+    }
+ 
+    let status = document.getElementById("modalStatus").value;
+ 
+    let sudahAbsen = dataAbsensi.some(item =>
+        item.nama === modalAktif.nama &&
+        item.kelas === modalAktif.kelas &&
+        item.mapel === modalAktif.mapel &&
+        item.pertemuan === sesi.pertemuan
+    );
+ 
+    if(sudahAbsen){
+        renderStatusSesiModal();
+        return;
+    }
+ 
+    dataAbsensi.push({
+        nama: modalAktif.nama,
+        kelas: modalAktif.kelas,
+        tanggal: sesi.tanggal,
+        mapel: modalAktif.mapel,
+        pertemuan: sesi.pertemuan,
+        waktu: sesi.waktu,
+        status: status
+    });
+ 
+    localStorage.setItem(
+        "absensi",
+        JSON.stringify(dataAbsensi)
+    );
+ 
+    renderModalIsi();
+    renderStatusSesiModal();
+    tampilkanDaftarMapel(); // refresh status sesi di tabel
+}
+ 
+// ====== DOWNLOAD QR CODE (PNG) ======
+// containerId: id div tempat QRCode.js merender kodenya
+// username: dipakai untuk nama file yang didownload
+function unduhQR(containerId, username){
+
+    let target = document.getElementById(containerId);
+
+    if(!target){
+        alert("QR Code tidak ditemukan.");
+        return;
+    }
+
+    // QRCode.js merender ke <canvas> (dan <img> sebagai fallback)
+    let canvas = target.querySelector("canvas");
+
+    if(!canvas){
+        alert("QR Code belum siap, coba lagi sebentar.");
+        return;
+    }
+
+    let namaFile = "QR_Presensi_" + (username || "siswa") + ".png";
+
+    let a = document.createElement("a");
+    a.href = canvas.toDataURL("image/png");
+    a.download = namaFile;
+    a.click();
+}
+
+// ====== GENERATE QR PRESENSI (HALAMAN SISWA) ======
+function tampilkanQRSiswa(){
+ 
+    let target = document.getElementById("qrcodeSiswa");
+ 
+    if(!target) return;
+ 
+    target.innerHTML = "";
+ 
+    new QRCode(target, {
+        text: "SISWA|" + siswaLogin.username,
+        width: 220,
+        height: 220,
+        colorDark: "#0d6efd",
+        colorLight: "#ffffff",
+        correctLevel: QRCode.CorrectLevel.M
+    });
+}
+ 
+// ====== LANGKAH 2: SCAN QR PRESENSI (HALAMAN GURU) — HANYA MENYALAKAN KAMERA ======
+let scanStream = null;
+let sedangScan = false;
+let scanCooldown = {};
+ 
+async function startScan(){
+
+    let kelas = document.getElementById("scanKelas").value;
+    let mapel = document.getElementById("scanMapel").value;
+
+    if(kelas=="" || mapel==""){
+        alert("Pilih Kelas dan Mata Pelajaran terlebih dahulu!");
+        return;
+    }
+
+    let key = kunciSesi(kelas, mapel);
+    let sesi = sesiPresensi[key];
+
+    if(!sesi || !sesi.terbuka){
+        alert("Sesi presensi untuk kelas & mata pelajaran ini belum dibuka.\n\nKlik tombol \"Buka Sesi Presensi\" dulu di bagian atas sebelum mulai scan.");
+        return;
+    }
+
+    scanSesiAktifKey = key;
+ 
+    // siapkan audio dari klik user supaya suara notifikasi tidak diblokir browser
+    try{
+        if(!audioCtxScan){
+            audioCtxScan = new (window.AudioContext || window.webkitAudioContext)();
+        }
+        if(audioCtxScan.state === "suspended"){
+            audioCtxScan.resume();
+        }
+    } catch(e){}
+ 
+    try{
+        scanStream = await navigator.mediaDevices.getUserMedia({
+            video: { facingMode: "environment" }
+        });
+    } catch(err){
+        alert("Tidak bisa mengakses kamera: " + err.message + "\n\nPastikan halaman diakses lewat HTTPS/localhost dan izin kamera sudah diberikan.");
+        return;
+    }
+ 
+    let video = document.getElementById("videoScan");
+    video.srcObject = scanStream;
+ 
+    await video.play();
+ 
+    sedangScan = true;
+ 
+    document.getElementById("btnMulaiScan").style.display = "none";
+    document.getElementById("btnStopScan").style.display = "inline-block";
+ 
+    requestAnimationFrame(tickScan);
+}
+ 
+function stopScan(){
+ 
+    sedangScan = false;
+ 
+    if(scanStream){
+        scanStream.getTracks().forEach(track => track.stop());
+        scanStream = null;
+    }
+ 
+    let btnMulai = document.getElementById("btnMulaiScan");
+    let btnStop = document.getElementById("btnStopScan");
+ 
+    if(btnMulai) btnMulai.style.display = "inline-block";
+    if(btnStop) btnStop.style.display = "none";
+}
+ 
+function tickScan(){
+ 
+    if(!sedangScan) return;
+ 
+    let video = document.getElementById("videoScan");
+    let canvas = document.getElementById("canvasScan");
+ 
+    if(video.readyState === video.HAVE_ENOUGH_DATA){
+ 
+        canvas.width = video.videoWidth;
+        canvas.height = video.videoHeight;
+ 
+        let ctx = canvas.getContext("2d");
+        ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+ 
+        let gambar = ctx.getImageData(0, 0, canvas.width, canvas.height);
+        let kode = jsQR(gambar.data, gambar.width, gambar.height);
+ 
+        if(kode){
+            prosesHasilScan(kode.data);
+        }
+    }
+ 
+    requestAnimationFrame(tickScan);
+}
+ 
+// ====== SUARA NOTIFIKASI SCAN BERHASIL ======
+let audioCtxScan = null;
+ 
+function mainkanSuaraSukses(){
+ 
+    try{
+        if(!audioCtxScan){
+            audioCtxScan = new (window.AudioContext || window.webkitAudioContext)();
+        }
+ 
+        let ctx = audioCtxScan;
+        let waktu = ctx.currentTime;
+ 
+        let osc = ctx.createOscillator();
+        let gain = ctx.createGain();
+ 
+        osc.type = "sine";
+        osc.frequency.setValueAtTime(880, waktu);
+        osc.frequency.setValueAtTime(1320, waktu + 0.1);
+ 
+        gain.gain.setValueAtTime(0.0001, waktu);
+        gain.gain.exponentialRampToValueAtTime(0.25, waktu + 0.02);
+        gain.gain.exponentialRampToValueAtTime(0.0001, waktu + 0.25);
+ 
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+ 
+        osc.start(waktu);
+        osc.stop(waktu + 0.26);
+    } catch(e){
+        // browser tidak mendukung audio, abaikan
+    }
+}
+ 
+function tampilkanPesanScan(teks, tipe){
+ 
+    let pesan = document.getElementById("scanPesan");
+ 
+    let warna = {
+        success: ["#d4edda","#155724"],
+        warning: ["#fff3cd","#856404"],
+        danger:  ["#f8d7da","#721c24"],
+        info:    ["#cff4fc","#055160"]
+    }[tipe] || ["#fff3cd","#856404"];
+ 
+    pesan.style.background = warna[0];
+    pesan.style.color = warna[1];
+    pesan.innerHTML = teks;
+    pesan.style.display = "block";
+}
+ 
+function prosesHasilScan(teks){
+ 
+    let sesi = sesiPresensi[scanSesiAktifKey];
+ 
+    if(!sesi || !sesi.terbuka){
+        tampilkanPesanScan("⚠ Sesi presensi sudah tidak aktif.", "warning");
+        return;
+    }
+ 
+    if(!teks.startsWith("SISWA|")){
+        tampilkanPesanScan("⚠ QR tidak dikenali sebagai QR presensi siswa.", "warning");
+        return;
+    }
+ 
+    let username = teks.replace("SISWA|", "");
+ 
+    // cegah kode yang sama ke-scan berulang kali dalam waktu singkat
+    let sekarang = Date.now();
+    if(scanCooldown[username] && (sekarang - scanCooldown[username]) < 3000){
+        return;
+    }
+    scanCooldown[username] = sekarang;
+ 
+    let akun = akunSiswa.find(a => a.username === username);
+ 
+    if(!akun){
+        tampilkanPesanScan("⚠ Akun siswa untuk QR ini tidak ditemukan.", "danger");
+        return;
+    }
+ 
+    if(akun.kelas !== sesi.kelas){
+        tampilkanPesanScan(`⚠ ${akun.nama} bukan siswa kelas ${sesi.kelas}, sesi ini untuk kelas tersebut.`, "danger");
+        return;
+    }
+ 
+    let sudahAbsen = dataAbsensi.some(item =>
+        item.nama === akun.nama &&
+        item.kelas === akun.kelas &&
+        item.mapel === sesi.mapel &&
+        item.pertemuan === sesi.pertemuan
+    );
+ 
+    if(sudahAbsen){
+        tampilkanPesanScan(`ℹ️ ${akun.nama} sudah tercatat Hadir sebelumnya di pertemuan ini.`, "info");
+        return;
+    }
+ 
+    dataAbsensi.push({
+        nama: akun.nama,
+        kelas: akun.kelas,
+        tanggal: sesi.tanggal,
+        mapel: sesi.mapel,
+        pertemuan: sesi.pertemuan,
+        waktu: sesi.waktu,
+        status: "Hadir"
+    });
+ 
+    localStorage.setItem("absensi", JSON.stringify(dataAbsensi));
+ 
+    tampilkanPesanScan(`✅ ${akun.nama} berhasil tercatat Hadir!`, "success");
+    mainkanSuaraSukses();
+ 
+    tampilkanData();
+}
+ 
+// ====== TAMPILKAN DATA ABSENSI, DIPISAHKAN PER KELAS ======
+function tampilkanData(){
+ 
+    let tbody = document.getElementById("dataAbsensi");
+ 
+    tbody.innerHTML="";
+
+    if(dataAbsensi.length === 0){
+        tbody.innerHTML = `<tr><td colspan="7">Belum ada data absensi</td></tr>`;
+        return;
+    }
+
+    // urutan kelas mengikuti daftarKelas (dikelola Admin)
+    let urutanKelas = daftarKelas;
+
+    let kelasYangAda = urutanKelas.filter(kelas =>
+        dataAbsensi.some(item => item.kelas === kelas)
+    );
+
+    // jaga-jaga kalau ada kelas di luar daftar di atas
+    let kelasLain = [...new Set(dataAbsensi.map(item => item.kelas))]
+        .filter(kelas => !urutanKelas.includes(kelas));
+
+    kelasYangAda.concat(kelasLain).forEach(kelas => {
+
+        tbody.innerHTML += `
+            <tr>
+                <td colspan="7" style="background:#0d6efd;color:white;font-weight:bold;text-align:left;">
+                    🏫 Kelas ${kelas}
+                </td>
+            </tr>
+        `;
+
+        dataAbsensi
+            .filter(item => item.kelas === kelas)
+            .forEach(item => {
+                tbody.innerHTML += `
+                <tr>
+                    <td>${item.nama}</td>
+                    <td>${item.kelas}</td>
+                    <td>${item.tanggal}</td>
+                    <td>${item.mapel}</td>
+                    <td>${item.pertemuan}</td>
+                    <td>${item.waktu}</td>
+                    <td>${item.status}</td>
+                </tr>
+                `;
+            });
+    });
+}
+ 
+function resetAbsensi(){
+ 
+    if(confirm("Yakin ingin menghapus semua data absensi?")){
+ 
+        localStorage.removeItem("absensi");
+ 
+        dataAbsensi = [];
+ 
+        tampilkanData();
+ 
         alert("Semua data absensi berhasil dihapus");
     }
 }
-
+ 
 function logout(){
+    stopScan();
     location.reload();
 }
+ 
+function downloadData(){
+ 
+    let isi = "Nama\tKelas\tTanggal\tMapel\tPertemuan\tWaktu\tStatus\n";
+ 
+    dataAbsensi.forEach(item => {
+        isi += `${item.nama}\t${item.kelas}\t${item.tanggal}\t${item.mapel}\t${item.pertemuan}\t${item.waktu}\t${item.status}\n`;
+    });
+ 
+    let blob = new Blob([isi], {
+        type: "application/vnd.ms-excel"
+    });
+ 
+    let a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = "Data_Absensi.xls";
+    a.click();
+}
 
-function logout(){
+// ====== DOWNLOAD DATA NILAI (HALAMAN GURU - SEMUA SISWA) ======
+function downloadNilaiGuru(){
+
+    if(dataNilai.length === 0){
+        alert("Belum ada data nilai untuk didownload.");
+        return;
+    }
+
+    let isi = "Nama\tKelas\tMata Pelajaran\tSemester\tJenis\tNilai\tKeterangan\tTanggal\n";
+
+    dataNilai.forEach(item => {
+        isi += `${item.nama}\t${item.kelas}\t${item.mapel}\t${item.semester || "-"}\t${item.jenis}\t${item.nilai}\t${keteranganNilai(item.nilai)}\t${item.tanggal}\n`;
+    });
+
+    let blob = new Blob([isi], {
+        type: "application/vnd.ms-excel"
+    });
+
+    let a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = "Data_Nilai_Semua_Siswa.xls";
+    a.click();
+}
+
+// ====== DOWNLOAD DATA NILAI (HALAMAN SISWA - NILAI SENDIRI) ======
+function downloadNilaiSiswa(){
+
+    let nilaiSaya = dataNilai.filter(item =>
+        item.nama === siswaLogin.nama && item.kelas === siswaLogin.kelas
+    );
+
+    if(nilaiSaya.length === 0){
+        alert("Belum ada data nilai untuk didownload.");
+        return;
+    }
+
+    let isi = "Nama\tKelas\tMata Pelajaran\tSemester\tJenis\tNilai\tKeterangan\tTanggal\n";
+
+    nilaiSaya.forEach(item => {
+        isi += `${item.nama}\t${item.kelas}\t${item.mapel}\t${item.semester || "-"}\t${item.jenis}\t${item.nilai}\t${keteranganNilai(item.nilai)}\t${item.tanggal}\n`;
+    });
+
+    let blob = new Blob([isi], {
+        type: "application/vnd.ms-excel"
+    });
+
+    let a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = `Data_Nilai_${siswaLogin.nama}.xls`;
+    a.click();
+}
+
+
+/* ======================================================================
+   ====================  PANEL ADMIN (TAMBAHAN BARU)  ====================
+   Semua kode di bawah ini murni TAMBAHAN. Tidak ada satupun fungsi atau
+   variabel yang sudah ada di atas yang diubah isinya — panel admin hanya
+   membaca & menulis ke variabel/localStorage yang sama supaya semua data
+   tetap sinkron dengan halaman Siswa dan halaman Guru.
+   ====================================================================== */
+
+// akun login admin (silakan ganti sesuai kebutuhan sekolah)
+let akunAdmin = { username: "admin", password: "admin123" };
+
+// mata pelajaran tambahan yang dibuat admin, per kelas: { "MIPA X": ["Bahasa Inggris", ...] }
+let mapelTambahan = JSON.parse(localStorage.getItem("mapelTambahan")) || {};
+
+// nama siswa tambahan yang dimasukkan admin ke daftar master, per kelas
+let siswaTambahan = JSON.parse(localStorage.getItem("siswaTambahan")) || {};
+
+function simpanMapelTambahan(){
+    localStorage.setItem("mapelTambahan", JSON.stringify(mapelTambahan));
+}
+
+function simpanSiswaTambahan(){
+    localStorage.setItem("siswaTambahan", JSON.stringify(siswaTambahan));
+}
+
+// gabungkan siswa tambahan admin ke dalam dataSiswa (master list) yang sudah ada,
+// dilakukan sekali saat halaman dimuat -- tidak mengubah kode asli, hanya menambah isi array
+(function gabungkanSiswaTambahanKeMaster(){
+    Object.keys(siswaTambahan).forEach(function(kelas){
+        if(!dataSiswa[kelas]) dataSiswa[kelas] = ["===================="];
+        siswaTambahan[kelas].forEach(function(nama){
+            if(!dataSiswa[kelas].includes(nama)){
+                dataSiswa[kelas].push(nama);
+            }
+        });
+    });
+})();
+
+// Daftar kelas baku yang dipakai di seluruh sistem.
+// Sekarang HANYA mengikuti daftarKelas (dikelola Admin di menu "Kelola Kelas").
+const semuaKelasAdmin = daftarKelas;
+
+// ====== ISI SEMUA DROPDOWN "KELAS" DI SELURUH HALAMAN DARI daftarKelas ======
+// Dipanggil saat halaman dimuat, dan setiap kali admin menambah/mengubah/menghapus kelas.
+function isiSemuaDropdownKelas(){
+
+    // dropdown dengan placeholder "Pilih Kelas"
+    let dropdownPilih = ["regKelas","scanKelas","nilaiKelas","adminSiswaKelas","adminMapelKelas"];
+
+    dropdownPilih.forEach(function(id){
+        let select = document.getElementById(id);
+        if(!select) return;
+
+        let nilaiSebelumnya = select.value;
+
+        select.innerHTML = '<option value="">Pilih Kelas</option>';
+        daftarKelas.forEach(function(kelas){
+            select.innerHTML += `<option>${kelas}</option>`;
+        });
+
+        // pertahankan pilihan sebelumnya kalau kelasnya masih ada
+        if(daftarKelas.includes(nilaiSebelumnya)){
+            select.value = nilaiSebelumnya;
+        }
+    });
+
+    // dropdown filter dengan opsi "Semua Kelas"
+    let dropdownFilter = ["adminAbsensiFilterKelas","adminNilaiFilterKelas"];
+
+    dropdownFilter.forEach(function(id){
+        let select = document.getElementById(id);
+        if(!select) return;
+
+        let nilaiSebelumnya = select.value;
+
+        select.innerHTML = '<option value="">Semua Kelas</option>';
+        daftarKelas.forEach(function(kelas){
+            select.innerHTML += `<option>${kelas}</option>`;
+        });
+
+        if(daftarKelas.includes(nilaiSebelumnya)){
+            select.value = nilaiSebelumnya;
+        }
+    });
+}
+
+// isi dropdown begitu halaman selesai dimuat
+document.addEventListener("DOMContentLoaded", isiSemuaDropdownKelas);
+
+// ====== NAVIGASI MENU ADMIN ======
+function gantiMenuAdmin(menu){
+
+    let daftarTab = ["dash","kelas","siswa","mapel","sesi","absensi","nilai","sistem"];
+
+    daftarTab.forEach(function(tab){
+        let konten = document.getElementById("adminKonten" + kapital(tab));
+        let tombol = document.getElementById("menuBtnAdmin" + kapital(tab));
+        if(konten) konten.style.display = (tab === menu) ? "block" : "none";
+        if(tombol) tombol.classList.toggle("aktif", tab === menu);
+    });
+
+    if(menu === "dash") renderAdminDashboard();
+    if(menu === "kelas"){
+        isiSemuaDropdownKelas();
+        renderAdminKelas();
+    }
+    if(menu === "siswa"){
+        isiSemuaDropdownKelas();
+        renderAdminSiswa();
+    }
+    if(menu === "mapel"){
+        isiSemuaDropdownKelas();
+        renderAdminMapel();
+    }
+    if(menu === "sesi") renderAdminSesi();
+    if(menu === "absensi"){
+        isiSemuaDropdownKelas();
+        renderAdminAbsensi();
+    }
+    if(menu === "nilai"){
+        isiSemuaDropdownKelas();
+        renderAdminNilai();
+    }
+}
+
+function kapital(teks){
+    return teks.charAt(0).toUpperCase() + teks.slice(1);
+}
+
+// ====== DASHBOARD ======
+function renderAdminDashboard(){
+
+    let totalSiswaMaster = 0;
+    daftarKelas.forEach(function(kelas){
+        (dataSiswa[kelas] || []).forEach(function(s){
+            if(!s.startsWith("=")) totalSiswaMaster++;
+        });
+    });
+
+    document.getElementById("statTotalSiswa").innerText = totalSiswaMaster;
+    document.getElementById("statTotalAkun").innerText = akunSiswa.length;
+
+    let sesiAktifCount = Object.values(sesiPresensi).filter(s => s.terbuka).length;
+    document.getElementById("statSesiAktif").innerText = sesiAktifCount;
+
+    document.getElementById("statTotalAbsensi").innerText = dataAbsensi.length;
+    document.getElementById("statTotalNilai").innerText = dataNilai.length;
+
+    let tbody = document.getElementById("adminRingkasanKelas");
+    tbody.innerHTML = "";
+
+    daftarKelas.forEach(function(kelas){
+        let siswaMaster = (dataSiswa[kelas] || []).filter(s => !s.startsWith("="));
+        let punyaAkun = siswaMaster.filter(nama =>
+            akunSiswa.some(a => a.kelas === kelas && a.nama === nama)
+        ).length;
+        let belumAkun = siswaMaster.length - punyaAkun;
+        let jumlahMapel = daftarMapelKelas(kelas).length;
+
+        tbody.innerHTML += `
+            <tr>
+                <td style="text-align:left;">${kelas}</td>
+                <td>${siswaMaster.length}</td>
+                <td style="color:#198754;font-weight:bold;">${punyaAkun}</td>
+                <td style="color:#dc3545;font-weight:bold;">${belumAkun}</td>
+                <td>${jumlahMapel}</td>
+            </tr>
+        `;
+    });
+}
+
+// ====== KELOLA KELAS (HANYA ADMIN) ======
+function adminTambahKelas(){
+
+    let namaInput = document.getElementById("adminKelasNama");
+    let nama = namaInput.value.trim();
+    let pesan = document.getElementById("adminKelasPesan");
+
+    pesan.style.background = "#fff3cd";
+    pesan.style.color = "#856404";
+
+    if(nama === ""){
+        pesan.innerHTML = "⚠ Isi nama kelas terlebih dahulu!";
+        pesan.style.display = "block";
+        return;
+    }
+
+    if(daftarKelas.includes(nama)){
+        pesan.innerHTML = "⚠ Kelas ini sudah ada di daftar!";
+        pesan.style.display = "block";
+        return;
+    }
+
+    daftarKelas.push(nama);
+    simpanDaftarKelas();
+
+    if(!dataSiswa[nama]) dataSiswa[nama] = ["===================="];
+
+    pesan.style.background = "#d4edda";
+    pesan.style.color = "#155724";
+    pesan.innerHTML = `✅ Kelas "${nama}" berhasil ditambahkan.`;
+    pesan.style.display = "block";
+
+    namaInput.value = "";
+
+    isiSemuaDropdownKelas();
+    renderAdminKelas();
+    renderAdminDashboard();
+}
+
+function renderAdminKelas(){
+
+    let tbody = document.getElementById("adminDaftarKelas");
+    tbody.innerHTML = "";
+
+    if(daftarKelas.length === 0){
+        tbody.innerHTML = `<tr><td colspan="3">Belum ada kelas</td></tr>`;
+        return;
+    }
+
+    daftarKelas.forEach(function(kelas){
+
+        let jumlahSiswa = (dataSiswa[kelas] || []).filter(s => !s.startsWith("=")).length;
+
+        tbody.innerHTML += `
+            <tr>
+                <td style="text-align:left;">${kelas}</td>
+                <td>${jumlahSiswa}</td>
+                <td>
+                    <button class="tutup-btn" onclick="adminUbahNamaKelas('${kelas.replace(/'/g,"\\'")}')">Ubah Nama</button>
+                    <button class="tutup-btn" style="background:#dc3545;margin-top:5px;" onclick="adminHapusKelas('${kelas.replace(/'/g,"\\'")}')">Hapus</button>
+                </td>
+            </tr>
+        `;
+    });
+}
+
+// Mengubah nama kelas: memperbarui SEMUA data terkait (siswa master, akun,
+// absensi, nilai, sesi presensi, mapel tambahan, siswa tambahan) supaya tetap sinkron.
+function adminUbahNamaKelas(namaLama){
+
+    let namaBaru = prompt(`Ubah nama kelas "${namaLama}" menjadi:`, namaLama);
+    if(namaBaru === null) return;
+
+    namaBaru = namaBaru.trim();
+
+    if(namaBaru === ""){
+        alert("Nama kelas tidak boleh kosong.");
+        return;
+    }
+
+    if(namaBaru === namaLama) return;
+
+    if(daftarKelas.includes(namaBaru)){
+        alert("Sudah ada kelas dengan nama tersebut.");
+        return;
+    }
+
+    if(!confirm(`Ubah nama kelas "${namaLama}" menjadi "${namaBaru}"? Semua data siswa, akun, absensi, nilai, dan sesi kelas ini akan ikut diperbarui.`)) return;
+
+    // daftarKelas
+    daftarKelas = daftarKelas.map(k => k === namaLama ? namaBaru : k);
+    simpanDaftarKelas();
+
+    // dataSiswa (master)
+    if(dataSiswa[namaLama]){
+        dataSiswa[namaBaru] = dataSiswa[namaLama];
+        delete dataSiswa[namaLama];
+    }
+
+    // siswaTambahan
+    if(siswaTambahan[namaLama]){
+        siswaTambahan[namaBaru] = siswaTambahan[namaLama];
+        delete siswaTambahan[namaLama];
+        simpanSiswaTambahan();
+    }
+
+    // mapelTambahan
+    if(mapelTambahan[namaLama]){
+        mapelTambahan[namaBaru] = mapelTambahan[namaLama];
+        delete mapelTambahan[namaLama];
+        simpanMapelTambahan();
+    }
+
+    // akunSiswa
+    akunSiswa.forEach(a => { if(a.kelas === namaLama) a.kelas = namaBaru; });
+    simpanAkunSiswa();
+
+    // dataAbsensi
+    dataAbsensi.forEach(item => { if(item.kelas === namaLama) item.kelas = namaBaru; });
+    localStorage.setItem("absensi", JSON.stringify(dataAbsensi));
+
+    // dataNilai
+    dataNilai.forEach(item => { if(item.kelas === namaLama) item.kelas = namaBaru; });
+    simpanDataNilai();
+
+    // sesiPresensi (key-nya menggunakan kelas, jadi harus dibangun ulang)
+    let sesiBaru = {};
+    Object.entries(sesiPresensi).forEach(function([key, sesi]){
+        if(sesi.kelas === namaLama){
+            sesi.kelas = namaBaru;
+            sesiBaru[kunciSesi(namaBaru, sesi.mapel)] = sesi;
+        } else {
+            sesiBaru[key] = sesi;
+        }
+    });
+    sesiPresensi = sesiBaru;
+    simpanSesi();
+
+    alert(`Kelas "${namaLama}" berhasil diubah menjadi "${namaBaru}".`);
+
+    isiSemuaDropdownKelas();
+    renderAdminKelas();
+    renderAdminDashboard();
+}
+
+function adminHapusKelas(kelas){
+
+    let jumlahSiswa = (dataSiswa[kelas] || []).filter(s => !s.startsWith("=")).length;
+
+    if(jumlahSiswa > 0){
+        alert(`Kelas "${kelas}" masih memiliki ${jumlahSiswa} siswa master. Hapus atau pindahkan siswanya terlebih dahulu di menu Kelola Siswa sebelum menghapus kelas ini.`);
+        return;
+    }
+
+    if(!confirm(`Hapus kelas "${kelas}"? Sesi presensi aktif untuk kelas ini (jika ada) juga akan ditutup. Data absensi/nilai lama untuk kelas ini TIDAK akan ikut terhapus.`)) return;
+
+    daftarKelas = daftarKelas.filter(k => k !== kelas);
+    simpanDaftarKelas();
+
+    delete dataSiswa[kelas];
+
+    if(siswaTambahan[kelas]){
+        delete siswaTambahan[kelas];
+        simpanSiswaTambahan();
+    }
+
+    if(mapelTambahan[kelas]){
+        delete mapelTambahan[kelas];
+        simpanMapelTambahan();
+    }
+
+    // tutup sesi presensi milik kelas ini
+    Object.keys(sesiPresensi).forEach(function(key){
+        if(sesiPresensi[key].kelas === kelas){
+            delete sesiPresensi[key];
+        }
+    });
+    simpanSesi();
+
+    isiSemuaDropdownKelas();
+    renderAdminKelas();
+    renderAdminDashboard();
+}
+
+// ====== KELOLA SISWA ======
+function adminTambahSiswa(){
+
+    let kelas = document.getElementById("adminSiswaKelas").value;
+    let nama = document.getElementById("adminSiswaNama").value.trim();
+    let pesan = document.getElementById("adminSiswaPesan");
+
+    pesan.style.background = "#fff3cd";
+    pesan.style.color = "#856404";
+
+    if(kelas=="" || nama==""){
+        pesan.innerHTML = "⚠ Pilih kelas dan isi nama siswa terlebih dahulu!";
+        pesan.style.display = "block";
+        return;
+    }
+
+    let sudahAda = (dataSiswa[kelas] || []).includes(nama);
+
+    if(sudahAda){
+        pesan.innerHTML = "⚠ Nama ini sudah ada di daftar kelas tersebut!";
+        pesan.style.display = "block";
+        return;
+    }
+
+    if(!dataSiswa[kelas]) dataSiswa[kelas] = ["===================="];
+    dataSiswa[kelas].push(nama);
+
+    if(!siswaTambahan[kelas]) siswaTambahan[kelas] = [];
+    siswaTambahan[kelas].push(nama);
+    simpanSiswaTambahan();
+
+    pesan.style.background = "#d4edda";
+    pesan.style.color = "#155724";
+    pesan.innerHTML = `✅ ${nama} berhasil ditambahkan ke kelas ${kelas}.`;
+    pesan.style.display = "block";
+
+    document.getElementById("adminSiswaNama").value = "";
+
+    renderAdminSiswa();
+    renderAdminDashboard();
+}
+
+function renderAdminSiswa(){
+
+    let wrap = document.getElementById("adminDaftarSiswaWrap");
+    wrap.innerHTML = "";
+
+    daftarKelas.forEach(function(kelas){
+
+        let namaSiswaKelas = (dataSiswa[kelas] || []).filter(s => !s.startsWith("="));
+
+        let baris = "";
+
+        if(namaSiswaKelas.length === 0){
+            baris = `<tr><td colspan="4">Belum ada siswa di kelas ini</td></tr>`;
+        } else {
+            namaSiswaKelas.forEach(function(nama){
+
+                let akun = akunSiswa.find(a => a.kelas === kelas && a.nama === nama);
+
+                let statusHtml = akun
+                    ? `<span class="badge badge-hadir">Punya Akun (${akun.username})</span>`
+                    : `<span style="color:#888;">Belum Ada Akun</span>`;
+
+                let aksiHtml = "";
+
+                if(akun){
+                    aksiHtml = `
+                        <button class="tutup-btn" onclick="adminResetPasswordAkun('${akun.username}')">Reset Password</button>
+                        <button class="tutup-btn" style="background:#dc3545;margin-top:5px;" onclick="adminHapusAkun('${akun.username}')">Hapus Akun</button>
+                    `;
+                } else {
+                    aksiHtml = `
+                        <button class="tutup-btn" style="background:#198754;" onclick="adminBuatAkunSiswa('${kelas}', '${nama.replace(/'/g,"\\'")}')">Buatkan Akun</button>
+                        <button class="tutup-btn" style="background:#6c757d;margin-top:5px;" onclick="adminHapusSiswaMaster('${kelas}', '${nama.replace(/'/g,"\\'")}')">Hapus dari Daftar</button>
+                    `;
+                }
+
+                baris += `
+                    <tr>
+                        <td style="text-align:left;">${nama}</td>
+                        <td>${statusHtml}</td>
+                        <td colspan="2">${aksiHtml}</td>
+                    </tr>
+                `;
+            });
+        }
+
+        wrap.innerHTML += `
+            <div class="tabel-wrap" style="margin-bottom:20px;">
+                <div style="text-align:left;font-weight:bold;color:#0d6efd;font-size:15px;margin-bottom:8px;">
+                    🏫 Kelas ${kelas} <span style="color:#666;font-weight:normal;font-size:13px;">(${namaSiswaKelas.length} siswa)</span>
+                </div>
+                <table>
+                    <thead>
+                        <tr><th>Nama</th><th>Status Akun</th><th colspan="2">Aksi</th></tr>
+                    </thead>
+                    <tbody>${baris}</tbody>
+                </table>
+            </div>
+        `;
+    });
+}
+
+function adminBuatAkunSiswa(kelas, nama){
+
+    let username = prompt(`Buat username untuk ${nama} (kelas ${kelas}):`, "");
+    if(username === null) return;
+    username = username.trim();
+
+    if(username === ""){
+        alert("Username tidak boleh kosong.");
+        return;
+    }
+
+    let dipakai = akunSiswa.some(a => a.username === username) || username === "guru" || username === akunAdmin.username;
+    if(dipakai){
+        alert("Username sudah dipakai, gunakan username lain.");
+        return;
+    }
+
+    let password = prompt(`Buat password untuk ${nama}:`, "");
+    if(password === null) return;
+    password = password.trim();
+
+    if(password === ""){
+        alert("Password tidak boleh kosong.");
+        return;
+    }
+
+    akunSiswa.push({ kelas: kelas, nama: nama, username: username, password: password });
+    simpanAkunSiswa();
+
+    alert(`Akun untuk ${nama} berhasil dibuat.\nUsername: ${username}`);
+
+    renderAdminSiswa();
+    renderAdminDashboard();
+}
+
+function adminResetPasswordAkun(username){
+
+    let akun = akunSiswa.find(a => a.username === username);
+    if(!akun) return;
+
+    let passwordBaru = prompt(`Password baru untuk ${akun.nama} (username: ${username}):`, "");
+    if(passwordBaru === null) return;
+    passwordBaru = passwordBaru.trim();
+
+    if(passwordBaru === ""){
+        alert("Password tidak boleh kosong.");
+        return;
+    }
+
+    akun.password = passwordBaru;
+    simpanAkunSiswa();
+
+    alert("Password berhasil diperbarui.");
+    renderAdminSiswa();
+}
+
+function adminHapusAkun(username){
+
+    let akun = akunSiswa.find(a => a.username === username);
+    if(!akun) return;
+
+    if(!confirm(`Hapus akun ${akun.nama} (username: ${username})? Data absensi & nilai siswa ini TIDAK akan terhapus.`)) return;
+
+    akunSiswa = akunSiswa.filter(a => a.username !== username);
+    simpanAkunSiswa();
+
+    renderAdminSiswa();
+    renderAdminDashboard();
+}
+
+function adminHapusSiswaMaster(kelas, nama){
+
+    let punyaAkun = akunSiswa.some(a => a.kelas === kelas && a.nama === nama);
+    if(punyaAkun){
+        alert("Siswa ini sudah punya akun. Hapus akunnya terlebih dahulu sebelum menghapus dari daftar master.");
+        return;
+    }
+
+    if(!confirm(`Hapus ${nama} dari daftar master kelas ${kelas}?`)) return;
+
+    dataSiswa[kelas] = (dataSiswa[kelas] || []).filter(s => s !== nama);
+
+    if(siswaTambahan[kelas]){
+        siswaTambahan[kelas] = siswaTambahan[kelas].filter(s => s !== nama);
+        simpanSiswaTambahan();
+    }
+
+    renderAdminSiswa();
+    renderAdminDashboard();
+}
+
+// ====== KELOLA MAPEL ======
+function adminTambahMapel(){
+
+    let kelas = document.getElementById("adminMapelKelas").value;
+    let nama = document.getElementById("adminMapelNama").value.trim();
+    let pesan = document.getElementById("adminMapelPesan");
+
+    pesan.style.background = "#fff3cd";
+    pesan.style.color = "#856404";
+
+    if(kelas=="" || nama==""){
+        pesan.innerHTML = "⚠ Pilih kelas dan isi nama mata pelajaran terlebih dahulu!";
+        pesan.style.display = "block";
+        return;
+    }
+
+    if(daftarMapelKelas(kelas).includes(nama)){
+        pesan.innerHTML = "⚠ Mata pelajaran ini sudah ada di kelas tersebut!";
+        pesan.style.display = "block";
+        return;
+    }
+
+    if(!mapelTambahan[kelas]) mapelTambahan[kelas] = [];
+    mapelTambahan[kelas].push(nama);
+    simpanMapelTambahan();
+
+    pesan.style.background = "#d4edda";
+    pesan.style.color = "#155724";
+    pesan.innerHTML = `✅ Mata pelajaran "${nama}" berhasil ditambahkan ke kelas ${kelas}.`;
+    pesan.style.display = "block";
+
+    document.getElementById("adminMapelNama").value = "";
+
+    renderAdminMapel();
+    renderAdminDashboard();
+}
+
+function renderAdminMapel(){
+
+    let tbody = document.getElementById("adminDaftarMapel");
+    tbody.innerHTML = "";
+
+    daftarKelas.forEach(function(kelas){
+
+        daftarMapelKelas(kelas).forEach(function(mapel){
+
+            let kustom = (mapelTambahan[kelas] || []).includes(mapel);
+
+            let aksiHtml = kustom
+                ? `<button class="tutup-btn" style="background:#dc3545;" onclick="adminHapusMapel('${kelas}', '${mapel.replace(/'/g,"\\'")}')">Hapus</button>`
+                : `<span style="color:#888;font-size:12px;">Bawaan Sistem</span>`;
+
+            tbody.innerHTML += `
+                <tr>
+                    <td>${kelas}</td>
+                    <td style="text-align:left;">${mapel}</td>
+                    <td>${aksiHtml}</td>
+                </tr>
+            `;
+        });
+    });
+}
+
+function adminHapusMapel(kelas, mapel){
+
+    if(!confirm(`Hapus mata pelajaran "${mapel}" dari kelas ${kelas}? Data nilai/absensi lama untuk mapel ini tidak akan ikut terhapus.`)) return;
+
+    if(mapelTambahan[kelas]){
+        mapelTambahan[kelas] = mapelTambahan[kelas].filter(m => m !== mapel);
+        simpanMapelTambahan();
+    }
+
+    renderAdminMapel();
+    renderAdminDashboard();
+}
+
+// ====== KELOLA SESI ======
+function renderAdminSesi(){
+
+    let tbody = document.getElementById("adminDaftarSesi");
+    let entri = Object.entries(sesiPresensi);
+
+    if(entri.length === 0){
+        tbody.innerHTML = `<tr><td colspan="7">Belum ada sesi presensi</td></tr>`;
+        return;
+    }
+
+    tbody.innerHTML = "";
+
+    entri.forEach(function([key, sesi]){
+        tbody.innerHTML += `
+            <tr>
+                <td>${sesi.kelas}</td>
+                <td>${sesi.mapel}</td>
+                <td>${sesi.pertemuan}</td>
+                <td>${sesi.tanggal}</td>
+                <td>${sesi.waktu}</td>
+                <td>${sesi.terbuka ? '<span class="badge badge-hadir">Aktif</span>' : '<span class="badge badge-alpha">Tertutup</span>'}</td>
+                <td>${sesi.terbuka ? `<button class="tutup-btn" onclick="adminTutupSesi('${key}')">Tutup</button>` : "-"}</td>
+            </tr>
+        `;
+    });
+}
+
+function adminTutupSesi(key){
+
+    if(!confirm("Tutup sesi presensi ini?")) return;
+
+    delete sesiPresensi[key];
+    simpanSesi();
+
+    renderAdminSesi();
+    renderAdminDashboard();
+}
+
+function adminTutupSemuaSesi(){
+
+    if(!confirm("Tutup SEMUA sesi presensi yang sedang aktif?")) return;
+
+    sesiPresensi = {};
+    simpanSesi();
+
+    renderAdminSesi();
+    renderAdminDashboard();
+}
+
+// ====== KELOLA ABSENSI ======
+function renderAdminAbsensi(){
+
+    let filterKelas = document.getElementById("adminAbsensiFilterKelas").value;
+    let tbody = document.getElementById("adminDaftarAbsensi");
+    tbody.innerHTML = "";
+
+    let data = filterKelas ? dataAbsensi.filter(item => item.kelas === filterKelas) : dataAbsensi;
+
+    if(data.length === 0){
+        tbody.innerHTML = `<tr><td colspan="8">Belum ada data absensi</td></tr>`;
+        return;
+    }
+
+    data.forEach(function(item){
+
+        let realIndex = dataAbsensi.indexOf(item);
+
+        tbody.innerHTML += `
+            <tr>
+                <td>${item.nama}</td>
+                <td>${item.kelas}</td>
+                <td>${item.mapel}</td>
+                <td>${item.pertemuan}</td>
+                <td>${item.tanggal}</td>
+                <td>${item.waktu}</td>
+                <td>${badgeStatus(item.status)}</td>
+                <td><button class="tutup-btn" style="background:#dc3545;" onclick="adminHapusAbsensi(${realIndex})">Hapus</button></td>
+            </tr>
+        `;
+    });
+}
+
+function adminHapusAbsensi(index){
+
+    if(!confirm("Hapus data absensi ini?")) return;
+
+    dataAbsensi.splice(index, 1);
+    localStorage.setItem("absensi", JSON.stringify(dataAbsensi));
+
+    renderAdminAbsensi();
+    renderAdminDashboard();
+}
+
+// ====== KELOLA NILAI ======
+function renderAdminNilai(){
+
+    let filterKelas = document.getElementById("adminNilaiFilterKelas").value;
+    let tbody = document.getElementById("adminDaftarNilai");
+    tbody.innerHTML = "";
+
+    let data = filterKelas ? dataNilai.filter(item => item.kelas === filterKelas) : dataNilai;
+
+    if(data.length === 0){
+        tbody.innerHTML = `<tr><td colspan="9">Belum ada data nilai</td></tr>`;
+        return;
+    }
+
+    data.forEach(function(item){
+
+        let realIndex = dataNilai.indexOf(item);
+
+        tbody.innerHTML += `
+            <tr>
+                <td>${item.nama}</td>
+                <td>${item.kelas}</td>
+                <td>${item.mapel}</td>
+                <td>${item.semester || "-"}</td>
+                <td>${item.jenis}</td>
+                <td>${item.nilai}</td>
+                <td>${badgeKeterangan(item.nilai)}</td>
+                <td>${item.tanggal}</td>
+                <td><button class="tutup-btn" style="background:#dc3545;" onclick="adminHapusNilai(${realIndex})">Hapus</button></td>
+            </tr>
+        `;
+    });
+}
+
+function adminHapusNilai(index){
+
+    if(!confirm("Hapus data nilai ini?")) return;
+
+    dataNilai.splice(index, 1);
+    simpanDataNilai();
+
+    renderAdminNilai();
+    renderAdminDashboard();
+}
+
+// ====== PERAWATAN SISTEM: PERIKSA KESALAHAN DATA ======
+function adminPeriksaData(){
+
+    let masalah = [];
+
+    // absensi yang akunnya sudah tidak ada
+    let absensiYatim = dataAbsensi.filter(item =>
+        !akunSiswa.some(a => a.nama === item.nama && a.kelas === item.kelas)
+    );
+    if(absensiYatim.length > 0){
+        masalah.push(`${absensiYatim.length} data absensi milik siswa yang akunnya sudah tidak ada / belum pernah terdaftar.`);
+    }
+
+    // nilai yang akunnya sudah tidak ada
+    let nilaiYatim = dataNilai.filter(item =>
+        !akunSiswa.some(a => a.nama === item.nama && a.kelas === item.kelas)
+    );
+    if(nilaiYatim.length > 0){
+        masalah.push(`${nilaiYatim.length} data nilai milik siswa yang akunnya sudah tidak ada / belum pernah terdaftar.`);
+    }
+
+    // akun siswa yang kelasnya tidak dikenal sistem
+    let akunKelasAneh = akunSiswa.filter(a => !daftarKelas.includes(a.kelas));
+    if(akunKelasAneh.length > 0){
+        masalah.push(`${akunKelasAneh.length} akun siswa dengan nama kelas yang tidak baku (${akunKelasAneh.map(a=>a.kelas).join(", ")}).`);
+    }
+
+    // sesi presensi yang datanya rusak/tidak lengkap
+    let sesiRusak = Object.entries(sesiPresensi).filter(([k,s]) => !s.kelas || !s.mapel || !s.pertemuan);
+    if(sesiRusak.length > 0){
+        masalah.push(`${sesiRusak.length} sesi presensi dengan data tidak lengkap.`);
+    }
+
+    let hasil = document.getElementById("adminPeriksaHasil");
+
+    if(masalah.length === 0){
+        hasil.innerHTML = "✅ Tidak ditemukan masalah pada data saat ini.";
+    } else {
+        hasil.innerHTML = "⚠ Ditemukan beberapa hal yang perlu diperhatikan:<br><br>• " + masalah.join("<br>• ") +
+            `<br><br><button onclick="adminPerbaikiDataYatim()" style="background:#dc3545;margin-top:10px;">🧹 Bersihkan Data Absensi/Nilai Tanpa Akun</button>`;
+    }
+
+    hasil.style.display = "block";
+}
+
+function adminPerbaikiDataYatim(){
+
+    if(!confirm("Ini akan menghapus semua data absensi & nilai milik siswa yang akunnya sudah tidak terdaftar. Lanjutkan?")) return;
+
+    dataAbsensi = dataAbsensi.filter(item =>
+        akunSiswa.some(a => a.nama === item.nama && a.kelas === item.kelas)
+    );
+    localStorage.setItem("absensi", JSON.stringify(dataAbsensi));
+
+    dataNilai = dataNilai.filter(item =>
+        akunSiswa.some(a => a.nama === item.nama && a.kelas === item.kelas)
+    );
+    simpanDataNilai();
+
+    alert("Data yang tidak konsisten berhasil dibersihkan.");
+
+    adminPeriksaData();
+    renderAdminDashboard();
+}
+
+// ====== BACKUP & RESTORE ======
+function adminBackupData(){
+
+    let backup = {
+        absensi: dataAbsensi,
+        sesiPresensi: sesiPresensi,
+        akunSiswa: akunSiswa,
+        dataNilai: dataNilai,
+        mapelTambahan: mapelTambahan,
+        siswaTambahan: siswaTambahan,
+        daftarKelas: daftarKelas,
+        tanggalBackup: new Date().toISOString()
+    };
+
+    let blob = new Blob([JSON.stringify(backup, null, 2)], { type: "application/json" });
+    let a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = "Backup_Sistem_Absensi_" + new Date().toISOString().slice(0,10) + ".json";
+    a.click();
+}
+
+function adminRestoreData(){
+
+    let fileInput = document.getElementById("adminRestoreFile");
+    let pesan = document.getElementById("adminSistemPesan");
+
+    pesan.style.background = "#fff3cd";
+    pesan.style.color = "#856404";
+
+    if(!fileInput.files || fileInput.files.length === 0){
+        pesan.innerHTML = "⚠ Pilih file backup (.json) terlebih dahulu!";
+        pesan.style.display = "block";
+        return;
+    }
+
+    if(!confirm("Memulihkan data akan MENIMPA seluruh data absensi, nilai, akun siswa, sesi, kelas, dan mapel/siswa tambahan saat ini. Lanjutkan?")) return;
+
+    let reader = new FileReader();
+
+    reader.onload = function(e){
+
+        try{
+            let backup = JSON.parse(e.target.result);
+
+            if(backup.absensi) localStorage.setItem("absensi", JSON.stringify(backup.absensi));
+            if(backup.sesiPresensi) localStorage.setItem("sesiPresensi", JSON.stringify(backup.sesiPresensi));
+            if(backup.akunSiswa) localStorage.setItem("akunSiswa", JSON.stringify(backup.akunSiswa));
+            if(backup.dataNilai) localStorage.setItem("dataNilai", JSON.stringify(backup.dataNilai));
+            if(backup.mapelTambahan) localStorage.setItem("mapelTambahan", JSON.stringify(backup.mapelTambahan));
+            if(backup.siswaTambahan) localStorage.setItem("siswaTambahan", JSON.stringify(backup.siswaTambahan));
+            if(backup.daftarKelas) localStorage.setItem("daftarKelas", JSON.stringify(backup.daftarKelas));
+
+            alert("Data berhasil dipulihkan. Halaman akan dimuat ulang.");
+            location.reload();
+
+        } catch(err){
+            pesan.style.background = "#f8d7da";
+            pesan.style.color = "#721c24";
+            pesan.innerHTML = "⚠ File backup tidak valid atau rusak.";
+            pesan.style.display = "block";
+        }
+    };
+
+    reader.readAsText(fileInput.files[0]);
+}
+
+function adminResetSemua(){
+
+    if(!confirm("PERINGATAN: Ini akan menghapus SEMUA data (akun siswa, absensi, nilai, sesi, kelas, mapel & siswa tambahan) secara permanen. Yakin ingin lanjut?")) return;
+    if(!confirm("Konfirmasi sekali lagi: data yang sudah dihapus TIDAK BISA dikembalikan kecuali punya file backup. Lanjutkan?")) return;
+
+    localStorage.removeItem("absensi");
+    localStorage.removeItem("sesiPresensi");
+    localStorage.removeItem("akunSiswa");
+    localStorage.removeItem("dataNilai");
+    localStorage.removeItem("mapelTambahan");
+    localStorage.removeItem("siswaTambahan");
+    localStorage.removeItem("daftarKelas");
+
+    alert("Semua data sistem berhasil direset.");
     location.reload();
 }
 
 </script>
-
+ 
 </body>
 </html>
